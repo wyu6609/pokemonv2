@@ -63,7 +63,7 @@ const PokemonModal = (props) => {
       {props.modaldata ? (
         <Modal
           {...props}
-          size="md"
+          size="lg"
           aria-labelledby="contained-modal-title-vcenter"
           centered
           className={` ${props.modaldata.data.types[0].type.name}-text`}
@@ -73,7 +73,10 @@ const PokemonModal = (props) => {
           >
             <div className="modal-header-content">
               <Badge className="pokemon-modal-id bg-secondary p-2">{`id ${props.modaldata.data.id} `}</Badge>
-              <Modal.Title className="pokemon-modal-title" id="contained-modal-title-vcenter">
+              <Modal.Title
+                className="pokemon-modal-title"
+                id="contained-modal-title-vcenter"
+              >
                 <Button
                   className="button_hover pokemon-name-btn"
                   onClick={() => {
@@ -91,11 +94,12 @@ const PokemonModal = (props) => {
           <Modal.Body>
             <Container className="pt-md-2">
               <Row className="g-3">
-                <Col xs={12} sm={6} md={6}>
+                <Col xs={12} sm={12} md={6} lg={5}>
                   <Row xs={12}>
-                    <Col>
+                    <Col className="pokemon-image-container">
                       <img
                         alt="Pokemon front view"
+                        className="pokemon-modal-image pokemon-front"
                         src={
                           props.shiny
                             ? props.modaldata.data.sprites.front_shiny
@@ -104,7 +108,7 @@ const PokemonModal = (props) => {
                       />
                       <img
                         alt="Pokemon back view"
-                        width="100"
+                        className="pokemon-modal-image pokemon-back"
                         src={
                           props.shiny
                             ? props.modaldata.data.sprites.back_shiny
@@ -113,7 +117,7 @@ const PokemonModal = (props) => {
                       />
                       <Button
                         variant={props.shiny ? "secondary" : "warning"}
-                        className="text-white btn-xs mt-lg-5 ml-lg-5 mt-md-5 ml-md-5"
+                        className="text-white btn-xs shiny-toggle-btn"
                         onClick={clickHandler}
                         size="sm"
                       >
@@ -123,23 +127,25 @@ const PokemonModal = (props) => {
                   </Row>
                 </Col>
 
-                <Col xs={12} sm={6} md={6} lg>
+                <Col xs={12} sm={12} md={6} lg>
                   {loading ? (
                     <>
-                      <h5 className="text-capitalize text-md-start text-center pt-4 font-weight-bold">
-                        Habitat:{" "}
-                        <span className="font-italic">{pokemonHabitat}</span>
-                      </h5>
-                      <p
-                        className="text-start mt-3"
-                        style={{
-                          fontSize: "0.95rem",
-                          lineHeight: "1.6",
-                          whiteSpace: "pre-wrap",
-                        }}
-                      >
-                        {pokemonDescription}
-                      </p>
+                      <div className="habitat-section">
+                        <h5 className="habitat-label">
+                          <span className="habitat-icon">🏞️</span>
+                          Habitat
+                        </h5>
+                        <p className="habitat-value">{pokemonHabitat}</p>
+                      </div>
+                      <div className="description-section">
+                        <h6 className="description-label">
+                          <span className="description-icon">📖</span>
+                          Pokédex Entry
+                        </h6>
+                        <p className="description-text">
+                          {pokemonDescription}
+                        </p>
+                      </div>
                     </>
                   ) : (
                     <Spinner
