@@ -123,6 +123,34 @@ function App() {
                 gap: "8px", 
                 alignItems: "center"
               }}>
+                <button
+                  className="device-button btn btn-sm"
+                  onClick={toggleAudio}
+                  title={audioEnabled ? "Mute Audio" : "Unmute Audio"}
+                  style={{ 
+                    padding: "4px 8px", 
+                    fontSize: "0.7rem",
+                    minWidth: "32px",
+                    height: "28px"
+                  }}
+                >
+                  {audioEnabled ? "🔊" : "🔇"}
+                </button>
+                <button
+                  className="device-button btn btn-sm"
+                  onClick={playNextTrack}
+                  disabled={shuffledTracks.length === 0}
+                  title="Next Track"
+                  style={{ 
+                    padding: "4px 8px", 
+                    fontSize: "0.7rem",
+                    minWidth: "32px",
+                    height: "28px"
+                  }}
+                >
+                  ⏭️
+                </button>
+                
                 {/* Track Display Screen */}
                 <div style={{
                   background: "linear-gradient(145deg, #1a1a1a 0%, #2d2d2d 100%)",
@@ -167,34 +195,6 @@ function App() {
                     </div>
                   )}
                 </div>
-                
-                <button
-                  className="device-button btn btn-sm"
-                  onClick={toggleAudio}
-                  title={audioEnabled ? "Mute Audio" : "Unmute Audio"}
-                  style={{ 
-                    padding: "4px 8px", 
-                    fontSize: "0.7rem",
-                    minWidth: "32px",
-                    height: "28px"
-                  }}
-                >
-                  {audioEnabled ? "🔊" : "🔇"}
-                </button>
-                <button
-                  className="device-button btn btn-sm"
-                  onClick={playNextTrack}
-                  disabled={shuffledTracks.length === 0}
-                  title="Next Track"
-                  style={{ 
-                    padding: "4px 8px", 
-                    fontSize: "0.7rem",
-                    minWidth: "32px",
-                    height: "28px"
-                  }}
-                >
-                  ⏭️
-                </button>
               </div>
             </div>
           </div>
