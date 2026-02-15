@@ -60,16 +60,24 @@ function App() {
         <div className="pokedex-device">
           <div className="pokedex-controls">
             <div className="device-info">
-              <span
+              <a
+                href="https://pokeapi.co/"
+                target="_blank"
+                rel="noopener noreferrer"
                 style={{
                   color: "#ffffff",
                   fontWeight: "600",
                   fontSize: "0.9rem",
                   letterSpacing: "0.5px",
+                  textDecoration: "none",
+                  cursor: "pointer",
+                  transition: "all 0.2s ease",
                 }}
+                onMouseEnter={(e) => e.target.style.color = "#ffed4e"}
+                onMouseLeave={(e) => e.target.style.color = "#ffffff"}
               >
                 POKÉDEX v2.0
-              </span>
+              </a>
             </div>
             <button
               className="device-button btn btn-sm"
