@@ -8,9 +8,15 @@ Simple Pokedex built with React and Bootstrap.
 
 ## Features
   1. UI maps 1000+ Pokemon Entries from open source Poke API database
-  2. UI maps entries and colorized based on Primary Pokemon Type
-  3. Dynamic Search Pokemon function bar by Pokemon name or Pokemon ID
-  4. Filter Pokemon function button by Pokemon Type
+  2. Pokédex device-themed UI with professional 3D styling, beveled effects, and depth shadows
+  3. Type-colorized cards with gradient backgrounds and type-specific border colors
+  4. Dynamic Search Pokemon function bar by Pokemon name or Pokemon ID
+  5. Filter Pokemon function button by Pokemon Type with 3D carousel hover effects
+  6. Interactive card selection highlighting with red glow effect
+  7. Comprehensive Dark Mode support with persistent theme preference
+  8. Fully responsive design optimized for mobile (iPhone SE) and desktop
+  9. Detailed Pokemon modal with type-specific header colors and matching card styling
+  10. Hover effects with smooth 3D transforms, shadows, and scale animations
 
 ## Desktop demo
 
