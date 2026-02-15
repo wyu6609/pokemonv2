@@ -56,8 +56,35 @@ function App() {
         onEnded={handleTrackEnd}
         onLoadedMetadata={() => setAudioEnabled(true)}
       ></audio>
-      <NavComponent onToggleAudio={toggleAudio} audioEnabled={audioEnabled} />
-      <PokemonPage />
+      <div className="App">
+        <div className="pokedex-device">
+          <div className="pokedex-controls">
+            <div className="device-info">
+              <span
+                style={{
+                  color: "#ffffff",
+                  fontWeight: "600",
+                  fontSize: "0.9rem",
+                  letterSpacing: "0.5px",
+                }}
+              >
+                POKÉDEX v2.0
+              </span>
+            </div>
+            <button
+              className="device-button btn btn-sm"
+              onClick={toggleAudio}
+              title={audioEnabled ? "Mute Audio" : "Enable Audio"}
+              style={{ padding: "8px 12px", fontSize: "0.8rem" }}
+            >
+              {audioEnabled ? "🔊 AUDIO" : "🔇 AUDIO"}
+            </button>
+          </div>
+          <div className="pokedex-screen">
+            <PokemonPage />
+          </div>
+        </div>
+      </div>
     </>
   );
 }

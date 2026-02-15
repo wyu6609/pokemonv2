@@ -93,69 +93,68 @@ const PokemonModal = (props) => {
           </Modal.Header>
           <Modal.Body>
             <Container className="pt-md-2">
-              <Row className="g-3">
-                <Col xs={12} sm={12} md={6} lg={5}>
-                  <Row xs={12}>
-                    <Col className="pokemon-image-container">
-                      <img
-                        alt="Pokemon front view"
-                        className="pokemon-modal-image pokemon-front"
-                        src={
-                          props.shiny
-                            ? props.modaldata.data.sprites.front_shiny
-                            : props.modaldata.data.sprites.front_default
-                        }
-                      />
-                      <img
-                        alt="Pokemon back view"
-                        className="pokemon-modal-image pokemon-back"
-                        src={
-                          props.shiny
-                            ? props.modaldata.data.sprites.back_shiny
-                            : props.modaldata.data.sprites.back_default
-                        }
-                      />
-                      <Button
-                        variant={props.shiny ? "secondary" : "warning"}
-                        className="text-white btn-xs shiny-toggle-btn"
-                        onClick={clickHandler}
-                        size="sm"
-                      >
-                        {props.shiny ? "View Normal" : "View Shiny"}
-                      </Button>
-                    </Col>
-                  </Row>
-                </Col>
+              <Row className="g-3 justify-content-center">
+                <Col xs={12} sm={10} md={8} lg={7}>
+                  <div className="pokemon-card-layout">
+                    {loading ? (
+                      <>
+                        <div className="pokemon-image-container">
+                          <img
+                            alt="Pokemon front view"
+                            className="pokemon-modal-image pokemon-front"
+                            src={
+                              props.shiny
+                                ? props.modaldata.data.sprites.front_shiny
+                                : props.modaldata.data.sprites.front_default
+                            }
+                          />
+                          <img
+                            alt="Pokemon back view"
+                            className="pokemon-modal-image pokemon-back"
+                            src={
+                              props.shiny
+                                ? props.modaldata.data.sprites.back_shiny
+                                : props.modaldata.data.sprites.back_default
+                            }
+                          />
+                          <Button
+                            variant={props.shiny ? "secondary" : "warning"}
+                            className="text-white btn-xs shiny-toggle-btn"
+                            onClick={clickHandler}
+                            size="sm"
+                          >
+                            {props.shiny ? "NORMAL FORM" : "✨ SHINY FORM"}
+                          </Button>
+                        </div>
 
-                <Col xs={12} sm={12} md={6} lg>
-                  {loading ? (
-                    <>
-                      <div className="habitat-section">
-                        <h5 className="habitat-label">
-                          <span className="habitat-icon">🏞️</span>
-                          Habitat
-                        </h5>
-                        <p className="habitat-value">{pokemonHabitat}</p>
-                      </div>
-                      <div className="description-section">
-                        <h6 className="description-label">
-                          <span className="description-icon">📖</span>
-                          Pokédex Entry
-                        </h6>
-                        <p className="description-text">
-                          {pokemonDescription}
-                        </p>
-                      </div>
-                    </>
-                  ) : (
-                    <Spinner
-                      animation="border"
-                      variant="danger"
-                      className="mx-auto "
-                    >
-                      <span className="visually-hidden">Loading...</span>
-                    </Spinner>
-                  )}
+                        <div className="habitat-section">
+                          <h5 className="habitat-label">
+                            <span className="habitat-icon">🏞️</span>
+                            Habitat
+                          </h5>
+                          <p className="habitat-value">{pokemonHabitat}</p>
+                        </div>
+
+                        <div className="description-section">
+                          <h6 className="description-label">
+                            <span className="description-icon">📖</span>
+                            Pokédex Entry
+                          </h6>
+                          <p className="description-text">
+                            {pokemonDescription}
+                          </p>
+                        </div>
+                      </>
+                    ) : (
+                      <Spinner
+                        animation="border"
+                        variant="danger"
+                        className="mx-auto"
+                      >
+                        <span className="visually-hidden">Loading...</span>
+                      </Spinner>
+                    )}
+                  </div>
                 </Col>
               </Row>
             </Container>

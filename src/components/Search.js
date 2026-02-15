@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef, useEffect, useState } from "react";
 import "./Search.css";
 import { FormControl, Dropdown, Container } from "react-bootstrap";
 
@@ -8,9 +8,28 @@ const capitalizeFirstLetter = (str) => {
 };
 
 const Search = ({ searchTerm, onChangeSearch, setStatus, status }) => {
+  const inputRef = useRef(null);
+  const [cursorPosition, setCursorPosition] = useState(0);
+
   //search input function
   const handleChange = (event) => {
     onChangeSearch(event.target.value);
+  };
+
+  // Update cursor position when text changes
+  useEffect(() => {
+    if (inputRef.current) {
+      const textWidth = getTextWidth(searchTerm, '0.95rem Share Tech Mono, monospace');
+      setCursorPosition(textWidth + 15); // 15px is the padding-left
+    }
+  }, [searchTerm]);
+
+  // Function to measure text width
+  const getTextWidth = (text, font) => {
+    const canvas = document.createElement('canvas');
+    const context = canvas.getContext('2d');
+    context.font = font;
+    return context.measureText(text).width;
   };
 
   //status Handler
@@ -43,13 +62,17 @@ const Search = ({ searchTerm, onChangeSearch, setStatus, status }) => {
   return (
     <Container className="sticky-top">
       <div className="search-wrapper my-4 mx-lg-5 mx-sm-5 shadow">
-        <FormControl
-          placeholder="Search a pokemon by id or name"
-          aria-label="Search Pokemon"
-          value={searchTerm}
-          onChange={handleChange}
-          className="search-input"
-        />
+        <div className="search-input-wrapper">
+          <FormControl
+            ref={inputRef}
+            placeholder="> search_pokemon --id=<id> --name=<name>"
+            aria-label="Search Pokemon"
+            value={searchTerm}
+            onChange={handleChange}
+            className="search-input"
+          />
+          <span className="terminal-cursor" style={{ left: `${cursorPosition}px` }}>█</span>
+        </div>
 
         <Dropdown>
           <Dropdown.Toggle

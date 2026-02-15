@@ -189,7 +189,7 @@ const PokemonPage = () => {
   const canLoadMore = displayCount < totalFiltered;
 
   return (
-    <>
+    <div className="device-content">
       <Search
         searchTerm={searchTerm}
         onChangeSearch={setSearchTerm}
@@ -199,7 +199,10 @@ const PokemonPage = () => {
       {loading ? (
         <>
           <div className="mt-3 mx-4">
-            <small className="text-muted">
+            <small
+              className="text-muted"
+              style={{ color: "#cccccc", fontSize: "0.85rem" }}
+            >
               Showing {pokemonsToDisplay.length} of {totalFiltered} Pokémon
             </small>
           </div>
@@ -212,16 +215,18 @@ const PokemonPage = () => {
           {canLoadMore && (
             <div className="d-flex justify-content-center mt-4 mb-4">
               <button
-                className="btn btn-danger btn-lg"
+                className="device-button btn btn-lg"
                 onClick={() => setDisplayCount(displayCount + ITEMS_PER_PAGE)}
                 style={{
-                  padding: "10px 30px",
-                  fontSize: "1rem",
+                  padding: "12px 30px",
+                  fontSize: "0.9rem",
                   fontWeight: "600",
-                  borderRadius: "25px",
+                  borderRadius: "8px",
+                  textTransform: "uppercase",
+                  letterSpacing: "0.5px",
                 }}
               >
-                Load More Pokémon
+                Load More Data
               </button>
             </div>
           )}
@@ -238,7 +243,7 @@ const PokemonPage = () => {
           </Spinner>
         </div>
       )}
-    </>
+    </div>
   );
 };
 
