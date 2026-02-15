@@ -9,10 +9,7 @@ function App() {
   const [audioEnabled, setAudioEnabled] = useState(false);
   const [currentTrack, setCurrentTrack] = useState("/sounds/pokemon_theme.mp3");
 
-  const tracks = [
-    "/sounds/pokemon_theme.mp3",
-    "/sounds/pokemon_center.mp3"
-  ];
+  const tracks = ["/sounds/pokemon_theme.mp3", "/sounds/pokemon_center.mp3"];
 
   // Get random track
   const getRandomTrack = () => {

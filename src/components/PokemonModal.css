@@ -7,6 +7,37 @@
 .pokemon-modal-name {
   padding: 3px;
 }
+
+.modal-header-content {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 12px;
+  width: 100%;
+}
+
+.pokemon-modal-title {
+  margin: 0 !important;
+  flex: 1;
+  text-align: left;
+}
+
+.pokemon-name-btn {
+  background: rgba(255, 255, 255, 0.2) !important;
+  color: white !important;
+  border: 2px solid rgba(255, 255, 255, 0.3) !important;
+  padding: 8px 12px !important;
+  border-radius: 8px !important;
+  transition: all 0.3s ease;
+  font-weight: 700;
+}
+
+.pokemon-name-btn:hover {
+  background: rgba(255, 255, 255, 0.3) !important;
+  border-color: rgba(255, 255, 255, 0.5) !important;
+  transform: translateX(4px);
+}
+
 .pokemon-modal-header {
   display: flex;
   flex-direction: row;
@@ -120,6 +151,8 @@
   background-color: #9dab18 !important;
   color: white !important;
   border-radius: 10px 10px 0 0 !important;
+  border-bottom: 3px solid rgba(0, 0, 0, 0.2) !important;
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.3);
 }
 
 .modal-content.dark-text .modal-header {
@@ -256,11 +289,17 @@
 }
 
 .modal-footer {
-  background: rgba(250, 250, 250, 0.95) !important;
-  border-top: 1px solid rgba(0, 0, 0, 0.1) !important;
+  background: linear-gradient(
+    135deg,
+    rgba(250, 250, 250, 0.98) 0%,
+    rgba(248, 248, 248, 0.95) 100%
+  ) !important;
+  border-top: 2px solid rgba(0, 0, 0, 0.12) !important;
   gap: 8px !important;
-  padding: 12px 20px !important;
+  padding: 14px 20px !important;
   border-radius: 0 0 10px 10px !important;
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.8),
+    0 -2px 8px rgba(0, 0, 0, 0.08);
 }
 
 /* pokemon types by background color */
@@ -410,12 +449,28 @@ body.dark-mode .modal-body {
 }
 
 body.dark-mode .modal-footer {
-  background: rgba(40, 40, 40, 0.95) !important;
-  border-top-color: #555 !important;
+  background: linear-gradient(
+    135deg,
+    rgba(40, 40, 40, 0.98) 0%,
+    rgba(38, 38, 38, 0.95) 100%
+  ) !important;
+  border-top-color: rgba(255, 255, 255, 0.15) !important;
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.1),
+    0 -2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* General Modal Header Styling - Card-like appearance */
+.modal-header {
+  border-bottom: 3px solid rgba(0, 0, 0, 0.15) !important;
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.3),
+    0 2px 8px rgba(0, 0, 0, 0.08);
+  padding: 16px !important;
 }
 
 body.dark-mode .modal-header {
-  border-bottom-color: #555 !important;
+  border-bottom-color: rgba(255, 255, 255, 0.2) !important;
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.1),
+    0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 body.dark-mode .modal-body h5,
@@ -425,4 +480,240 @@ body.dark-mode .modal-body p {
 
 body.dark-mode .btn-close {
   filter: invert(1) !important;
+}
+
+/* Description Section Styling */
+.modal-body h5 {
+  background: linear-gradient(
+    135deg,
+    rgba(250, 250, 250, 0.8) 0%,
+    rgba(245, 245, 245, 0.9) 100%
+  ) !important;
+  padding: 12px 14px !important;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  margin-bottom: 12px !important;
+  font-weight: 700;
+  color: #1a1a1a !important;
+}
+
+body.dark-mode .modal-body h5 {
+  background: linear-gradient(
+    135deg,
+    rgba(40, 40, 40, 0.9) 0%,
+    rgba(35, 35, 35, 0.95) 100%
+  ) !important;
+  border-color: rgba(255, 255, 255, 0.15);
+  color: #ddd !important;
+}
+
+.modal-body p {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.7) 0%,
+    rgba(250, 250, 250, 0.8) 100%
+  ) !important;
+  padding: 14px 16px !important;
+  border-radius: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  line-height: 1.8 !important;
+  color: #333 !important;
+  margin: 0 !important;
+}
+
+body.dark-mode .modal-body p {
+  background: linear-gradient(
+    135deg,
+    rgba(45, 45, 45, 0.95) 0%,
+    rgba(40, 40, 40, 1) 100%
+  ) !important;
+  border-color: rgba(255, 255, 255, 0.15);
+  color: #bbb !important;
+}
+
+/* Mobile Responsive Modal Layout */
+@media (max-width: 576px) {
+  .modal-content {
+    border-radius: 16px !important;
+  }
+
+  .modal-header {
+    flex-direction: row;
+    text-align: left;
+    padding: 12px 16px !important;
+    gap: 10px;
+    align-items: center;
+  }
+
+  .modal-header-content {
+    flex-direction: row;
+    width: 100%;
+  }
+
+  .pokemon-modal-id {
+    flex-shrink: 0;
+    font-size: 11px;
+  }
+
+  .pokemon-modal-title {
+    flex: 1;
+  }
+
+  .pokemon-name-btn {
+    padding: 6px 10px !important;
+    font-size: 0.9rem;
+  }
+
+  .modal-title {
+    width: 100%;
+    margin-top: 0 !important;
+  }
+
+  .pokemon-modal-id {
+    font-size: 12px;
+    padding: 6px 10px;
+  }
+
+  .modal-body {
+    padding: 16px !important;
+  }
+
+  .modal-body .container {
+    padding: 0 !important;
+  }
+
+  .modal-body .row {
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .modal-body .col {
+    flex: 1 !important;
+  }
+
+  /* Image Section - Full Width */
+  .modal-body .col:first-child {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 12px;
+    background: linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.7) 0%,
+      rgba(248, 248, 248, 0.6) 100%
+    );
+    padding: 16px !important;
+    border-radius: 12px;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.6);
+  }
+
+  body.dark-mode .modal-body .col:first-child {
+    background: linear-gradient(
+      135deg,
+      rgba(30, 30, 30, 0.8) 0%,
+      rgba(25, 25, 25, 0.7) 100%
+    );
+    border-color: rgba(255, 255, 255, 0.15);
+  }
+
+  .modal-body .col:first-child img {
+    max-width: 120px;
+  }
+
+  /* Description Section */
+  .modal-body .col:nth-child(2) {
+    background: linear-gradient(
+      135deg,
+      rgba(240, 240, 240, 0.9) 0%,
+      rgba(250, 250, 250, 1) 100%
+    );
+    padding: 16px !important;
+    border-radius: 12px;
+    border: 2px solid rgba(0, 0, 0, 0.12);
+    box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.8),
+      0 4px 12px rgba(0, 0, 0, 0.08);
+  }
+
+  body.dark-mode .modal-body .col:nth-child(2) {
+    background: linear-gradient(
+      135deg,
+      rgba(35, 35, 35, 0.95) 0%,
+      rgba(40, 40, 40, 1) 100%
+    );
+    border-color: rgba(255, 255, 255, 0.2);
+    box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.1),
+      0 4px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  .modal-body h5 {
+    font-size: 1rem !important;
+    margin-bottom: 12px !important;
+    font-weight: 700 !important;
+  }
+
+  body.dark-mode .modal-body h5 {
+    color: #ddd !important;
+  }
+
+  .modal-body p {
+    font-size: 0.9rem !important;
+    line-height: 1.7 !important;
+    margin: 0 !important;
+  }
+
+  body.dark-mode .modal-body p {
+    color: #bbb !important;
+  }
+
+  .modal-footer {
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 12px !important;
+    justify-content: center;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+  }
+
+  body.dark-mode .modal-footer {
+    border-top-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .modal-footer .btn {
+    flex: 1;
+    min-width: 80px;
+    font-size: 0.8rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .modal-dialog {
+    margin: 10px !important;
+  }
+
+  .modal-content {
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2) !important;
+  }
+}
+
+/* Desktop Card-like Sections */
+.modal-body .col {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.7) 0%,
+    rgba(248, 248, 248, 0.6) 100%
+  );
+  padding: 12px !important;
+  border-radius: 10px;
+  border: 2px solid rgba(0, 0, 0, 0.1) !important;
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.6);
+}
+
+body.dark-mode .modal-body .col {
+  background: linear-gradient(
+    135deg,
+    rgba(30, 30, 30, 0.8) 0%,
+    rgba(25, 25, 25, 0.7) 100%
+  );
+  border-color: rgba(255, 255, 255, 0.15) !important;
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.1);
 }

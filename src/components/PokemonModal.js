@@ -71,26 +71,28 @@ const PokemonModal = (props) => {
           <Modal.Header
             className={`${props.modaldata.data.types[0].type.name} text-white `}
           >
-            <Badge className="pokemon-modal-id bg-secondary p-2">{`id ${props.modaldata.data.id} `}</Badge>
-            <Modal.Title align="start" id="contained-modal-title-vcenter">
-              <Button
-                className="button_hover"
-                onClick={() => {
-                  let url = `https://pokemon.fandom.com/wiki/${props.modaldata.data.name}`;
-                  window.open(url, "_blank");
-                }}
-              >
-                <span className="text-uppercase pokemon-modal-name">
-                  {props.modaldata.data.name}
-                </span>
-              </Button>
-            </Modal.Title>
+            <div className="modal-header-content">
+              <Badge className="pokemon-modal-id bg-secondary p-2">{`id ${props.modaldata.data.id} `}</Badge>
+              <Modal.Title className="pokemon-modal-title" id="contained-modal-title-vcenter">
+                <Button
+                  className="button_hover pokemon-name-btn"
+                  onClick={() => {
+                    let url = `https://pokemon.fandom.com/wiki/${props.modaldata.data.name}`;
+                    window.open(url, "_blank");
+                  }}
+                >
+                  <span className="text-uppercase pokemon-modal-name">
+                    {props.modaldata.data.name}
+                  </span>
+                </Button>
+              </Modal.Title>
+            </div>
           </Modal.Header>
           <Modal.Body>
             <Container className="pt-md-2">
-              <Row>
-                <Col xs={6} s={6} md={6}>
-                  <Row sx={6}>
+              <Row className="g-3">
+                <Col xs={12} sm={6} md={6}>
+                  <Row xs={12}>
                     <Col>
                       <img
                         alt="Pokemon front view"
@@ -121,13 +123,21 @@ const PokemonModal = (props) => {
                   </Row>
                 </Col>
 
-                <Col xs={6} s={6} md={6} lg>
+                <Col xs={12} sm={6} md={6} lg>
                   {loading ? (
                     <>
                       <h5 className="text-capitalize text-md-start text-center pt-4 font-weight-bold">
-                        Habitat: <span className="font-italic">{pokemonHabitat}</span>
+                        Habitat:{" "}
+                        <span className="font-italic">{pokemonHabitat}</span>
                       </h5>
-                      <p className="text-start mt-3" style={{ fontSize: "0.95rem", lineHeight: "1.6", whiteSpace: "pre-wrap" }}>
+                      <p
+                        className="text-start mt-3"
+                        style={{
+                          fontSize: "0.95rem",
+                          lineHeight: "1.6",
+                          whiteSpace: "pre-wrap",
+                        }}
+                      >
                         {pokemonDescription}
                       </p>
                     </>
