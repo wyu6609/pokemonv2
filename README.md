@@ -1,10 +1,9 @@
 ## POKEDEX
 <a href="https://wills-pokedex.netlify.app/">Website here</a>
 
-Simple Pokedex built with React and Bootstrap.
+**A comprehensive Pokédex application built with React and Bootstrap, featuring a device-like UI with advanced 3D styling and interactive features.**
 
-<a href = "https://pokeapi.co/">Pokemon API</a><br/>
-<a href = "https://pokemon.fandom.com/">Pokemon Wiki</a>
+<a href="https://pokeapi.co/">Pokemon API</a> | <a href="https://pokemon.fandom.com/">Pokemon Wiki</a>
 
 ## Features
   1. UI maps 1000+ Pokemon Entries from open source Poke API database

@@ -2,11 +2,8 @@ import React from "react";
 
 import {
   Button,
-  Nav,
   Navbar,
-  NavDropdown,
   Container,
-  Offcanvas,
 } from "react-bootstrap";
 const NavComponent = ({ onToggleAudio, audioEnabled }) => {
   return (
@@ -19,7 +16,7 @@ const NavComponent = ({ onToggleAudio, audioEnabled }) => {
     >
       <Container className="justify-content-center">
         <Navbar.Brand    className="text-align-center">
-          <a href = "https://pokeapi.co/" target = "_blank">
+          <a href="https://pokeapi.co/" target="_blank" rel="noreferrer">
           <img
             src="https://upload.wikimedia.org/wikipedia/commons/9/98/International_Pok%C3%A9mon_logo.svg"
             width="90%"

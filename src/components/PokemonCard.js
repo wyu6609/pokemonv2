@@ -10,15 +10,13 @@ const PokemonCard = ({
   onToggleFavorite,
   isSelected = false,
 }) => {
-  //set pokemon type state
-  const [pokeType, setPokeType] = useState(pokemon.data.types[0].type.name);
   //set pokemon type color state
   const [typeColor, setTypeColor] = useState(pokemon.data.types[0].type.name);
   const [isFav, setIsFav] = useState(isFavorite);
 
   // set color type
   useEffect(() => {
-    switch (pokeType) {
+    switch (pokemon.data.types[0].type.name) {
       case "bug":
         setTypeColor("bug");
         break;
@@ -77,9 +75,7 @@ const PokemonCard = ({
       default:
         setTypeColor("");
     }
-  }, [pokeType]);
-
-  let pokemonType = pokemon.data.types.map((el) => el.type.name).join(" ");
+  }, [pokemon.data.types]);
 
   //front state
   const [front, setFront] = useState(true);

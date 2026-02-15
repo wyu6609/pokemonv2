@@ -166,23 +166,23 @@ const PokemonPage = () => {
   }, []);
 
   // pokemon type component load
-
   useEffect(() => {
     filterHandler();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [pokemon, status]);
 
   //filter Pokemon by search
   const pokemonsToDisplay = filteredPokemon
     .filter(
       (poke) =>
-        poke.data.id == searchTerm ||
+        poke.data.id === parseInt(searchTerm) ||
         poke.data.name.toLowerCase().includes(searchTerm.toLowerCase())
     )
     .slice(0, displayCount);
 
   const totalFiltered = filteredPokemon.filter(
     (poke) =>
-      poke.data.id == searchTerm ||
+      poke.data.id === parseInt(searchTerm) ||
       poke.data.name.toLowerCase().includes(searchTerm.toLowerCase())
   ).length;
 

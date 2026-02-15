@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import PokemonCard from "./PokemonCard";
-import { Container, Row, Col, Button } from "react-bootstrap";
+import { Row, Col } from "react-bootstrap";
 import PokemonModal from "./PokemonModal";
 import { v4 as uuidv4 } from "uuid";
 

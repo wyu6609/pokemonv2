@@ -93,6 +93,7 @@ const PokemonModal = (props) => {
                   <Row sx={6}>
                     <Col>
                       <img
+                        alt="Pokemon front view"
                         src={
                           props.shiny
                             ? props.modaldata.data.sprites.front_shiny
@@ -100,6 +101,7 @@ const PokemonModal = (props) => {
                         }
                       />
                       <img
+                        alt="Pokemon back view"
                         width="100"
                         src={
                           props.shiny
@@ -122,11 +124,11 @@ const PokemonModal = (props) => {
                 <Col xs={6} s={6} md={6} lg>
                   {loading ? (
                     <>
-                      <h5 className="text-capitalize text-md-start text-center pt-4 font-italic ">
-                        Habitat: {pokemonHabitat}
+                      <h5 className="text-capitalize text-md-start text-center pt-4 font-weight-bold">
+                        Habitat: <span className="font-italic">{pokemonHabitat}</span>
                       </h5>
-                      <p className="small">
-                        <small>{pokemonDescription}</small>
+                      <p className="text-start mt-3" style={{ fontSize: "0.95rem", lineHeight: "1.6", whiteSpace: "pre-wrap" }}>
+                        {pokemonDescription}
                       </p>
                     </>
                   ) : (
