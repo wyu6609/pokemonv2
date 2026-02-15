@@ -12,6 +12,218 @@
   flex-direction: row;
 }
 
+/* Modal styling to match cards */
+.modal-content {
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(240, 240, 240, 0.9) 100%
+  ) !important;
+  border: 2px solid #999 !important;
+  border-radius: 12px !important;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.15) !important;
+}
+
+/* Type-specific modal borders */
+.modal-content.bug-text {
+  border-color: #9dab18 !important;
+  border-width: 2px !important;
+}
+
+.modal-content.dark-text {
+  border-color: #3c2d22 !important;
+  border-width: 2px !important;
+}
+
+.modal-content.dragon-text {
+  border-color: #6f59dd !important;
+  border-width: 2px !important;
+}
+
+.modal-content.electric-text {
+  border-color: #fbc116 !important;
+  border-width: 2px !important;
+}
+
+.modal-content.fairy-text {
+  border-color: #f9adfb !important;
+  border-width: 2px !important;
+}
+
+.modal-content.fighting-text {
+  border-color: #7b250c !important;
+  border-width: 2px !important;
+}
+
+.modal-content.fire-text {
+  border-color: #f63807 !important;
+  border-width: 2px !important;
+}
+
+.modal-content.flying-text {
+  border-color: #98a8f4 !important;
+  border-width: 2px !important;
+}
+
+.modal-content.ghost-text {
+  border-color: #5d5eb0 !important;
+  border-width: 2px !important;
+}
+
+.modal-content.grass-text {
+  border-color: #73c233 !important;
+  border-width: 2px !important;
+}
+
+.modal-content.ground-text {
+  border-color: #d3b055 !important;
+  border-width: 2px !important;
+}
+
+.modal-content.ice-text {
+  border-color: #a7e8fd !important;
+  border-width: 2px !important;
+}
+
+.modal-content.normal-text {
+  border-color: #c7bfb8 !important;
+  border-width: 2px !important;
+}
+
+.modal-content.poison-text {
+  border-color: #924193 !important;
+  border-width: 2px !important;
+}
+
+.modal-content.psychic-text {
+  border-color: #ed447e !important;
+  border-width: 2px !important;
+}
+
+.modal-content.rock-text {
+  border-color: #b99d4d !important;
+  border-width: 2px !important;
+}
+
+.modal-content.steel-text {
+  border-color: #aeaebc !important;
+  border-width: 2px !important;
+}
+
+.modal-content.water-text {
+  border-color: #2c97ff !important;
+  border-width: 2px !important;
+}
+
+/* Type-specific modal header backgrounds with text color for readability */
+.modal-content.bug-text .modal-header {
+  background-color: #9dab18 !important;
+  color: white !important;
+  border-radius: 10px 10px 0 0 !important;
+}
+
+.modal-content.dark-text .modal-header {
+  background-color: #3c2d22 !important;
+  color: white !important;
+  border-radius: 10px 10px 0 0 !important;
+}
+
+.modal-content.dragon-text .modal-header {
+  background-color: #6f59dd !important;
+  color: white !important;
+  border-radius: 10px 10px 0 0 !important;
+}
+
+.modal-content.electric-text .modal-header {
+  background-color: #fbc116 !important;
+  color: #333 !important;
+  border-radius: 10px 10px 0 0 !important;
+}
+
+.modal-content.fairy-text .modal-header {
+  background-color: #f9adfb !important;
+  color: #333 !important;
+  border-radius: 10px 10px 0 0 !important;
+}
+
+.modal-content.fighting-text .modal-header {
+  background-color: #7b250c !important;
+  color: white !important;
+  border-radius: 10px 10px 0 0 !important;
+}
+
+.modal-content.fire-text .modal-header {
+  background-color: #f63807 !important;
+  color: white !important;
+  border-radius: 10px 10px 0 0 !important;
+}
+
+.modal-content.flying-text .modal-header {
+  background-color: #98a8f4 !important;
+  color: white !important;
+  border-radius: 10px 10px 0 0 !important;
+}
+
+.modal-content.ghost-text .modal-header {
+  background-color: #5d5eb0 !important;
+  color: white !important;
+  border-radius: 10px 10px 0 0 !important;
+}
+
+.modal-content.grass-text .modal-header {
+  background-color: #73c233 !important;
+  color: white !important;
+  border-radius: 10px 10px 0 0 !important;
+}
+
+.modal-content.ground-text .modal-header {
+  background-color: #d3b055 !important;
+  color: #333 !important;
+  border-radius: 10px 10px 0 0 !important;
+}
+
+.modal-content.ice-text .modal-header {
+  background-color: #a7e8fd !important;
+  color: #333 !important;
+  border-radius: 10px 10px 0 0 !important;
+}
+
+.modal-content.normal-text .modal-header {
+  background-color: #c7bfb8 !important;
+  color: #333 !important;
+  border-radius: 10px 10px 0 0 !important;
+}
+
+.modal-content.poison-text .modal-header {
+  background-color: #924193 !important;
+  color: white !important;
+  border-radius: 10px 10px 0 0 !important;
+}
+
+.modal-content.psychic-text .modal-header {
+  background-color: #ed447e !important;
+  color: white !important;
+  border-radius: 10px 10px 0 0 !important;
+}
+
+.modal-content.rock-text .modal-header {
+  background-color: #b99d4d !important;
+  color: #333 !important;
+  border-radius: 10px 10px 0 0 !important;
+}
+
+.modal-content.steel-text .modal-header {
+  background-color: #aeaebc !important;
+  color: #333 !important;
+  border-radius: 10px 10px 0 0 !important;
+}
+
+.modal-content.water-text .modal-header {
+  background-color: #2c97ff !important;
+  color: white !important;
+  border-radius: 10px 10px 0 0 !important;
+}
+
 .type-btn,
 .type-btn:hover,
 .type-btn:focus {
@@ -31,6 +243,24 @@
 .modal-footer > .btn-close {
   color: #fff !important;
   opacity: 1;
+}
+
+/* Modal Body and Footer Styling */
+.modal-body {
+  padding: 20px !important;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(250, 250, 250, 0.9) 100%
+  ) !important;
+}
+
+.modal-footer {
+  background: rgba(250, 250, 250, 0.95) !important;
+  border-top: 1px solid rgba(0, 0, 0, 0.1) !important;
+  gap: 8px !important;
+  padding: 12px 20px !important;
+  border-radius: 0 0 10px 10px !important;
 }
 
 /* pokemon types by background color */
@@ -158,4 +388,41 @@
   box-shadow: 8px 14px 38px rgba(39, 44, 49, 0.06),
     1px 3px 8px rgba(39, 44, 49, 0.03);
   transition: all 0.5s ease; /* back to normal */
+}
+
+/* Dark Mode Support */
+body.dark-mode .modal-content {
+  background: linear-gradient(
+    135deg,
+    rgba(40, 40, 40, 0.95) 0%,
+    rgba(50, 50, 50, 0.9) 100%
+  ) !important;
+  border-color: #555 !important;
+}
+
+body.dark-mode .modal-body {
+  background: linear-gradient(
+    135deg,
+    rgba(40, 40, 40, 0.95) 0%,
+    rgba(45, 45, 45, 0.9) 100%
+  ) !important;
+  color: #fff !important;
+}
+
+body.dark-mode .modal-footer {
+  background: rgba(40, 40, 40, 0.95) !important;
+  border-top-color: #555 !important;
+}
+
+body.dark-mode .modal-header {
+  border-bottom-color: #555 !important;
+}
+
+body.dark-mode .modal-body h5,
+body.dark-mode .modal-body p {
+  color: #ddd !important;
+}
+
+body.dark-mode .btn-close {
+  filter: invert(1) !important;
 }

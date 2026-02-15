@@ -8,6 +8,7 @@ const PokemonCard = ({
   setModalShow,
   isFavorite = false,
   onToggleFavorite,
+  isSelected = false,
 }) => {
   //set pokemon type state
   const [pokeType, setPokeType] = useState(pokemon.data.types[0].type.name);
@@ -106,7 +107,9 @@ const PokemonCard = ({
       onClick={() => {
         setModalShow(true);
       }}
-      className={`card shadow pokemon-card border-${typeColor} text-dark p-2`}
+      className={`card shadow pokemon-card border-${typeColor} text-dark p-2 ${
+        isSelected ? "selected" : ""
+      }`}
     >
       <Badge
         pill

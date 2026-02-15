@@ -11,13 +11,17 @@ const PokemonCollection = ({ pokemon, favorites = [], onToggleFavorite }) => {
   const [modalShow, setModalShow] = useState(false);
   //pokemon set shiny
   const [shiny, setShiny] = useState(false);
+  // track selected card
+  const [selectedCardId, setSelectedCardId] = useState(null);
 
   const cards = pokemon.map((poke) => {
     const isFav = favorites.includes(poke.data.id);
+    const isSelected = selectedCardId === poke.data.id;
     return (
       <Col
         onClick={() => {
           setModalData(poke);
+          setSelectedCardId(poke.data.id);
         }}
         key={uuidv4()}
         xs={12}
@@ -31,6 +35,7 @@ const PokemonCollection = ({ pokemon, favorites = [], onToggleFavorite }) => {
           pokemon={poke}
           isFavorite={isFav}
           onToggleFavorite={onToggleFavorite}
+          isSelected={isSelected}
         />
       </Col>
     );

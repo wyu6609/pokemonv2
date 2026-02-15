@@ -8,7 +8,7 @@ import {
   Container,
   Offcanvas,
 } from "react-bootstrap";
-const NavComponent = () => {
+const NavComponent = ({ onToggleAudio, audioEnabled }) => {
   return (
     <Navbar
       bg="danger"
@@ -28,7 +28,24 @@ const NavComponent = () => {
           />
           </a>
         </Navbar.Brand>
-        
+        <Button
+          variant="light"
+          size="sm"
+          onClick={onToggleAudio}
+          style={{
+            marginLeft: "auto",
+            borderRadius: "50%",
+            width: "40px",
+            height: "40px",
+            padding: "0",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+          }}
+          title={audioEnabled ? "Mute" : "Unmute"}
+        >
+          {audioEnabled ? "🔊" : "🔇"}
+        </Button>
       </Container>
     </Navbar>
   );

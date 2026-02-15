@@ -1,46 +1,73 @@
 .search-wrapper {
-  border: 2px solid rgba(220, 53, 69, 0.3) !important;
-  border-radius: 10px;
+  border: 3px solid #222 !important;
+  border-radius: 12px !important;
   overflow: visible;
   transition: all 0.3s ease;
   display: flex;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3), inset 0 2px 4px rgba(255,255,255,0.1);
+  background: white !important;
 }
 
 .search-wrapper:focus-within {
-  border: 2px solid #dc3545 !important;
-  box-shadow: 0 0 15px rgba(220, 53, 69, 0.4) !important;
+  border: 3px solid #dc3545 !important;
+  box-shadow: 0 0 20px rgba(220, 53, 69, 0.5), inset 0 2px 4px rgba(255,255,255,0.1) !important;
 }
 
 .search-input {
   border: none !important;
   text-align: left !important;
-  background: rgba(255, 255, 255, 0.95) !important;
+  background: rgba(255, 255, 255, 0.98) !important;
   font-size: 0.95rem;
   padding: 12px 15px !important;
   transition: all 0.3s ease;
   flex: 1;
   outline: none !important;
+  color: #333 !important;
+  font-weight: 500;
+}
+
+.search-input::placeholder {
+  color: #999 !important;
 }
 
 .search-input:focus {
   outline: none !important;
   box-shadow: none !important;
-  background: rgba(255, 255, 255, 0.95) !important;
+  background: rgba(255, 255, 255, 1) !important;
+}
+
+.search-icon {
+  width: 20px;
+  height: 20px;
+  margin: 0 12px;
+  color: #dc3545;
+  flex-shrink: 0;
 }
 
 .dropdown-btn {
-  border-radius: 0 !important;
-  padding: 12px 18px !important;
-  font-weight: 600;
+  border-radius: 6px !important;
+  padding: 11px 14px !important;
+  font-weight: 700;
   text-transform: uppercase !important;
-  font-size: 0.85rem;
-  border: none !important;
-  border-left: 1px solid rgba(220, 53, 69, 0.2) !important;
+  font-size: 0.8rem;
+  border: 2px solid rgba(0, 0, 0, 0.3) !important;
   transition: all 0.3s ease;
   cursor: pointer !important;
   pointer-events: all !important;
   color: white !important;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3), inset 0 1px 2px rgba(255,255,255,0.2) !important;
+  letter-spacing: 0.5px;
+}
+
+.dropdown-btn:hover {
+  opacity: 0.95;
+  transform: scale(1.08);
+  box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4), inset 0 1px 2px rgba(255,255,255,0.2) !important;
+}
+
+.dropdown-btn:active {
+  transform: scale(0.98);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3), inset 0 1px 2px rgba(0,0,0,0.1) !important;
 }
 
 .dropdown-btn:hover {
