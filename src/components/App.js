@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from "react";
 import "./App.css";
-import NavComponent from "./NavComponent";
 import PokemonPage from "./PokemonPage";
 import "bootstrap/dist/css/bootstrap.min.css";
 
