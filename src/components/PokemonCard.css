@@ -762,6 +762,8 @@ body.dark-mode .card.pokemon-card.selected {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  min-height: 280px;
+  justify-content: space-between;
 }
 
 /* Stats Container */
@@ -769,7 +771,7 @@ body.dark-mode .card.pokemon-card.selected {
   background: rgba(0, 0, 0, 0.03);
   padding: 10px;
   border-radius: 8px;
-  margin-top: 8px;
+  margin-top: auto;
 }
 
 /* Mobile Carousel Scroll Effect */

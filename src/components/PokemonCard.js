@@ -179,7 +179,7 @@ const PokemonCard = ({
           ))}
         </div>
 
-        <div className="stats-container mt-3">
+        <div className="stats-container">
           <div className="stat-row d-flex justify-content-between align-items-center mb-2">
             <span className="stat-label" style={{ fontSize: "0.75rem" }}>
               HP
