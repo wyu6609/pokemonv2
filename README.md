@@ -23,6 +23,4 @@
 
 <p align="center"><img src = "/demo/pokemon_demo.gif"/></p>
 
-## Mobile demo
 
-<p align="center"><img src = "/demo/pokemon_mobile_demo.gif"/></p>
