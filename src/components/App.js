@@ -2,6 +2,8 @@ import React, { useState, useEffect, useRef, useMemo } from "react";
 import "./App.css";
 import PokemonPage from "./PokemonPage";
 import "bootstrap/dist/css/bootstrap.min.css";
+import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const audioRef = useRef(null);
@@ -46,6 +48,21 @@ function App() {
       });
     }
   }, [audioEnabled, currentTrack, shuffledTracks]);
+
+  // Show toast notification on page load
+  useEffect(() => {
+    setTimeout(() => {
+      toast.info("🎵 Click the music button to enjoy Pokemon background music!", {
+        position: "top-right",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        theme: "colored",
+      });
+    }, 2000); // Show after 2 seconds to let the page load
+  }, []);
 
   // Handle track end - play next track
   const handleTrackEnd = () => {
@@ -223,6 +240,7 @@ function App() {
           </div>
         </div>
       </div>
+      <ToastContainer />
     </>
   );
 }
