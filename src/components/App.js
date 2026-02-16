@@ -174,17 +174,16 @@ function App() {
         <div className="pokedex-device">
           <div className="pokedex-controls">
             <div className="controls-wrapper">
-              <div className="cli-header">
+              <div className="pokedex-header">
+                <div className="pokedex-indicator"></div>
                 <a
                   href="https://pokeapi.co/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="cli-link"
+                  className="pokedex-title-link"
                 >
-                  <span className="cli-prompt">$</span>
-                  <span className="cli-text">pokedex</span>
-                  <span className="cli-version">--version 2.0</span>
-                  <span className="cli-cursor">_</span>
+                  <span className="pokedex-title">POKÉDEX</span>
+                  <span className="pokedex-version">v2.0</span>
                 </a>
               </div>
 
