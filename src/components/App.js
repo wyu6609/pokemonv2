@@ -7,7 +7,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const audioRef = useRef(null);
-  const [audioEnabled, setAudioEnabled] = useState(true);
+  const [audioEnabled, setAudioEnabled] = useState(false);
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
   const [shuffledTracks, setShuffledTracks] = useState([]);
   const [trackChanging, setTrackChanging] = useState(false);
@@ -21,13 +21,22 @@ function App() {
     [],
   );
 
-  // Shuffle tracks on mount
+  // Initialize with tracks in order for first play
   useEffect(() => {
-    const shuffled = [...tracks].sort(() => Math.random() - 0.5);
-    setShuffledTracks(shuffled);
+    setShuffledTracks([...tracks]);
   }, [tracks]);
 
   const currentTrack = shuffledTracks[currentTrackIndex] || tracks[0];
+
+  // Auto-play whenever track changes and audio is enabled
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (audio && audioEnabled && shuffledTracks.length > 0) {
+      audio.play().catch((error) => {
+        console.log("Autoplay prevented:", error);
+      });
+    }
+  }, [audioEnabled, currentTrack, shuffledTracks]);
 
   // Track change animation effect
   useEffect(() => {
@@ -40,34 +49,35 @@ function App() {
     }
   }, [currentTrackIndex, shuffledTracks.length]);
 
-  useEffect(() => {
-    const audio = audioRef.current;
-    if (audio && audioEnabled && shuffledTracks.length > 0) {
-      audio.play().catch((error) => {
-        console.log("Autoplay prevented:", error);
-      });
-    }
-  }, [audioEnabled, currentTrack, shuffledTracks]);
-
   // Show toast notification on page load
   useEffect(() => {
-    setTimeout(() => {
-      toast.info("🎵 Click the music button to enjoy Pokemon background music!", {
-        position: "top-right",
+    const timer = setTimeout(() => {
+      toast.info("🔇 Music is muted. Click the speaker button to enjoy Pokemon background music!", {
+        position: "top-center",
         autoClose: 5000,
         hideProgressBar: false,
         closeOnClick: true,
         pauseOnHover: true,
         draggable: true,
         theme: "colored",
+        toastId: "music-toast", // Prevent duplicate toasts
       });
-    }, 2000); // Show after 2 seconds to let the page load
+    }, 500); // Show after 0.5 seconds instead of 2 seconds
+
+    return () => clearTimeout(timer);
   }, []);
 
   // Handle track end - play next track
   const handleTrackEnd = () => {
     if (audioEnabled) {
       playNextTrack();
+      // Shuffle tracks after first track for variety
+      if (currentTrackIndex === 0) {
+        setTimeout(() => {
+          const shuffled = [...tracks].sort(() => Math.random() - 0.5);
+          setShuffledTracks(shuffled);
+        }, 100);
+      }
     }
   };
 
@@ -88,15 +98,6 @@ function App() {
     if (shuffledTracks.length === 0) return;
     const nextIndex = (currentTrackIndex + 1) % shuffledTracks.length;
     setCurrentTrackIndex(nextIndex);
-    // Explicitly play the next track for continuous playback
-    setTimeout(() => {
-      const audio = audioRef.current;
-      if (audio && audioEnabled) {
-        audio.play().catch((error) => {
-          console.log("Autoplay prevented:", error);
-        });
-      }
-    }, 100); // Small delay to ensure state has updated
   };
 
   return (
