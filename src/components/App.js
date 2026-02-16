@@ -49,20 +49,82 @@ function App() {
     }
   }, [currentTrackIndex, shuffledTracks.length]);
 
-  // Show toast notification on page load
+  // Show title toast notification on page load
   useEffect(() => {
     const timer = setTimeout(() => {
-      toast.info("🔇 Music is muted. Click the speaker button to enjoy Pokemon background music!", {
-        position: "top-center",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        theme: "colored",
-        toastId: "music-toast", // Prevent duplicate toasts
-      });
-    }, 500); // Show after 0.5 seconds instead of 2 seconds
+      // Title toast - center center
+      toast(
+        <div style={{ textAlign: 'center' }}>
+          <div style={{ 
+            fontSize: '2rem', 
+            fontWeight: 'bold',
+            marginBottom: '15px',
+            color: '#ffffff',
+            textShadow: '0 4px 12px rgba(0, 0, 0, 0.8), 0 0 20px rgba(220, 53, 69, 0.6)',
+            letterSpacing: '4px',
+            textTransform: 'uppercase',
+            fontFamily: "'Arial Black', 'Impact', sans-serif"
+          }}>
+            POKÉDEX v2.0
+          </div>
+          <a 
+            href="https://github.com/wyu6609/pokemonv2"
+            target="_blank"
+            rel="noopener noreferrer"
+            style={{ 
+              color: '#ffffff',
+              textDecoration: 'none',
+              fontSize: '0.95rem',
+              textShadow: '0 2px 6px rgba(0, 0, 0, 0.6)',
+              transition: 'all 0.3s ease',
+              display: 'inline-block',
+              padding: '8px 16px',
+              border: '2px solid rgba(255, 255, 255, 0.6)',
+              borderRadius: '8px',
+              background: 'rgba(255, 255, 255, 0.1)',
+              fontFamily: "'Arial', sans-serif"
+            }}
+            onMouseEnter={(e) => {
+              e.target.style.background = 'rgba(255, 255, 255, 0.2)';
+              e.target.style.borderColor = 'rgba(255, 255, 255, 1)';
+              e.target.style.transform = 'scale(1.05)';
+            }}
+            onMouseLeave={(e) => {
+              e.target.style.background = 'rgba(255, 255, 255, 0.1)';
+              e.target.style.borderColor = 'rgba(255, 255, 255, 0.6)';
+              e.target.style.transform = 'scale(1)';
+            }}
+          >
+            github.com/wyu6609/pokemonv2
+          </a>
+        </div>,
+        {
+          containerId: 'center-toast',
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          className: 'pokedex-title-toast',
+          toastId: "pokedex-title",
+        },
+      );
+
+      // Music toast - top center
+      toast.info(
+        "🔇 Music is muted. Click the speaker button to enjoy Pokemon background music!",
+        {
+          containerId: 'top-toast',
+          autoClose: 3000,
+          hideProgressBar: true,
+          closeOnClick: true,
+          pauseOnHover: true,
+          draggable: true,
+          theme: "colored",
+          toastId: "music-toast",
+        },
+      );
+    }, 500);
 
     return () => clearTimeout(timer);
   }, []);
@@ -111,43 +173,23 @@ function App() {
       <div className="App">
         <div className="pokedex-device">
           <div className="pokedex-controls">
-            <div
-              style={{
-                display: "flex",
-                justifyContent: "space-between",
-                alignItems: "center",
-                width: "100%",
-              }}
-            >
-              <div className="device-info">
+            <div className="controls-wrapper">
+              <div className="cli-header">
                 <a
                   href="https://pokeapi.co/"
                   target="_blank"
                   rel="noopener noreferrer"
-                  style={{
-                    color: "#ffffff",
-                    fontWeight: "600",
-                    fontSize: "0.9rem",
-                    letterSpacing: "0.5px",
-                    textDecoration: "none",
-                    cursor: "pointer",
-                    transition: "all 0.2s ease",
-                  }}
-                  onMouseEnter={(e) => (e.target.style.color = "#ffed4e")}
-                  onMouseLeave={(e) => (e.target.style.color = "#ffffff")}
+                  className="cli-link"
                 >
-                  POKÉDEX v2.0
+                  <span className="cli-prompt">$</span>
+                  <span className="cli-text">pokedex</span>
+                  <span className="cli-version">--version 2.0</span>
+                  <span className="cli-cursor">_</span>
                 </a>
               </div>
 
               {/* Audio Controls */}
-              <div
-                style={{
-                  display: "flex",
-                  gap: "8px",
-                  alignItems: "center",
-                }}
-              >
+              <div className="audio-controls">
                 <button
                   className="device-button btn btn-sm"
                   onClick={toggleAudio}
@@ -241,7 +283,23 @@ function App() {
           </div>
         </div>
       </div>
-      <ToastContainer />
+      <ToastContainer 
+        enableMultiContainer 
+        containerId="center-toast"
+        position="top-center"
+        style={{
+          position: 'fixed',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          width: 'auto'
+        }}
+      />
+      <ToastContainer 
+        enableMultiContainer 
+        containerId="top-toast"
+        position="top-center"
+      />
     </>
   );
 }

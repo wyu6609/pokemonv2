@@ -40,6 +40,7 @@ const PokemonCollection = ({ pokemon, favorites = [], onToggleFavorite }) => {
       </Col>
     );
   });
+
   return (
     <>
       <PokemonModal

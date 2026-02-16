@@ -5,7 +5,7 @@ import PokemonCollection from "./PokemonCollection";
 
 import { Spinner } from "react-bootstrap";
 
-const URL_ENDPOINT = "https://pokeapi.co/api/v2/pokemon?limit=150";
+const URL_ENDPOINT = "https://pokeapi.co/api/v2/pokemon?limit=1302";
 
 const PokemonPage = () => {
   //set pokemon state
@@ -23,8 +23,8 @@ const PokemonPage = () => {
   const [filteredPokemon, setFilteredPokemon] = useState([]);
 
   // pagination state
-  const [displayCount, setDisplayCount] = useState(50);
-  const ITEMS_PER_PAGE = 50;
+  const [currentPage, setCurrentPage] = useState(1);
+  const ITEMS_PER_PAGE = 24;
 
   // favorites state
   const [favorites, setFavorites] = useState(() => {
@@ -50,92 +50,92 @@ const PokemonPage = () => {
     switch (status) {
       case "bug":
         setFilteredPokemon(
-          pokemon.filter((poke) => poke.data.types[0].type.name === "bug")
+          pokemon.filter((poke) => poke.data.types[0].type.name === "bug"),
         );
         break;
       case "dark":
         setFilteredPokemon(
-          pokemon.filter((poke) => poke.data.types[0].type.name === "dark")
+          pokemon.filter((poke) => poke.data.types[0].type.name === "dark"),
         );
         break;
       case "dragon":
         setFilteredPokemon(
-          pokemon.filter((poke) => poke.data.types[0].type.name === "dragon")
+          pokemon.filter((poke) => poke.data.types[0].type.name === "dragon"),
         );
         break;
       case "electric":
         setFilteredPokemon(
-          pokemon.filter((poke) => poke.data.types[0].type.name === "electric")
+          pokemon.filter((poke) => poke.data.types[0].type.name === "electric"),
         );
         break;
       case "fairy":
         setFilteredPokemon(
-          pokemon.filter((poke) => poke.data.types[0].type.name === "fairy")
+          pokemon.filter((poke) => poke.data.types[0].type.name === "fairy"),
         );
         break;
       case "fighting":
         setFilteredPokemon(
-          pokemon.filter((poke) => poke.data.types[0].type.name === "fighting")
+          pokemon.filter((poke) => poke.data.types[0].type.name === "fighting"),
         );
         break;
       case "fire":
         setFilteredPokemon(
-          pokemon.filter((poke) => poke.data.types[0].type.name === "fire")
+          pokemon.filter((poke) => poke.data.types[0].type.name === "fire"),
         );
         break;
       case "flying":
         setFilteredPokemon(
-          pokemon.filter((poke) => poke.data.types[0].type.name === "flying")
+          pokemon.filter((poke) => poke.data.types[0].type.name === "flying"),
         );
         break;
       case "ghost":
         setFilteredPokemon(
-          pokemon.filter((poke) => poke.data.types[0].type.name === "ghost")
+          pokemon.filter((poke) => poke.data.types[0].type.name === "ghost"),
         );
         break;
       case "grass":
         setFilteredPokemon(
-          pokemon.filter((poke) => poke.data.types[0].type.name === "grass")
+          pokemon.filter((poke) => poke.data.types[0].type.name === "grass"),
         );
         break;
       case "ground":
         setFilteredPokemon(
-          pokemon.filter((poke) => poke.data.types[0].type.name === "ground")
+          pokemon.filter((poke) => poke.data.types[0].type.name === "ground"),
         );
         break;
       case "ice":
         setFilteredPokemon(
-          pokemon.filter((poke) => poke.data.types[0].type.name === "ice")
+          pokemon.filter((poke) => poke.data.types[0].type.name === "ice"),
         );
         break;
       case "normal":
         setFilteredPokemon(
-          pokemon.filter((poke) => poke.data.types[0].type.name === "normal")
+          pokemon.filter((poke) => poke.data.types[0].type.name === "normal"),
         );
         break;
       case "poison":
         setFilteredPokemon(
-          pokemon.filter((poke) => poke.data.types[0].type.name === "poison")
+          pokemon.filter((poke) => poke.data.types[0].type.name === "poison"),
         );
         break;
       case "psychic":
         setFilteredPokemon(
-          pokemon.filter((poke) => poke.data.types[0].type.name === "psychic")
+          pokemon.filter((poke) => poke.data.types[0].type.name === "psychic"),
         );
         break;
       case "rock":
         setFilteredPokemon(
-          pokemon.filter((poke) => poke.data.types[0].type.name === "rock")
+          pokemon.filter((poke) => poke.data.types[0].type.name === "rock"),
         );
         break;
       case "steel":
         setFilteredPokemon(
-          pokemon.filter((poke) => poke.data.types[0].type.name === "steel")
+          pokemon.filter((poke) => poke.data.types[0].type.name === "steel"),
         );
         break;
       case "water":
         setFilteredPokemon(
-          pokemon.filter((poke) => poke.data.types[0].type.name === "water")
+          pokemon.filter((poke) => poke.data.types[0].type.name === "water"),
         );
         break;
       default:
@@ -155,7 +155,7 @@ const PokemonPage = () => {
           // all requests are now complete
           setPokemon(res);
           setLoading(true);
-        })
+        }),
       );
     });
   };
@@ -172,21 +172,58 @@ const PokemonPage = () => {
   }, [pokemon, status]);
 
   //filter Pokemon by search
-  const pokemonsToDisplay = filteredPokemon
-    .filter(
-      (poke) =>
-        poke.data.id === parseInt(searchTerm) ||
-        poke.data.name.toLowerCase().includes(searchTerm.toLowerCase())
-    )
-    .slice(0, displayCount);
-
-  const totalFiltered = filteredPokemon.filter(
+  const allFilteredPokemon = filteredPokemon.filter(
     (poke) =>
       poke.data.id === parseInt(searchTerm) ||
-      poke.data.name.toLowerCase().includes(searchTerm.toLowerCase())
-  ).length;
+      poke.data.name.toLowerCase().includes(searchTerm.toLowerCase()),
+  );
 
-  const canLoadMore = displayCount < totalFiltered;
+  const totalFiltered = allFilteredPokemon.length;
+  const totalPages = Math.ceil(totalFiltered / ITEMS_PER_PAGE);
+
+  // Calculate pagination
+  const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+  const endIndex = startIndex + ITEMS_PER_PAGE;
+  const pokemonsToDisplay = allFilteredPokemon.slice(startIndex, endIndex);
+
+  // Reset to page 1 when filters change
+  useEffect(() => {
+    setCurrentPage(1);
+  }, [searchTerm, status]);
+
+  // Scroll to top when page changes
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }, [currentPage]);
+
+  // Generate page numbers to display
+  const getPageNumbers = () => {
+    const pages = [];
+    const maxPagesToShow = 5;
+
+    if (totalPages <= maxPagesToShow) {
+      for (let i = 1; i <= totalPages; i++) {
+        pages.push(i);
+      }
+    } else {
+      if (currentPage <= 3) {
+        for (let i = 1; i <= 4; i++) pages.push(i);
+        pages.push("...");
+        pages.push(totalPages);
+      } else if (currentPage >= totalPages - 2) {
+        pages.push(1);
+        pages.push("...");
+        for (let i = totalPages - 3; i <= totalPages; i++) pages.push(i);
+      } else {
+        pages.push(1);
+        pages.push("...");
+        for (let i = currentPage - 1; i <= currentPage + 1; i++) pages.push(i);
+        pages.push("...");
+        pages.push(totalPages);
+      }
+    }
+    return pages;
+  };
 
   return (
     <div className="device-content">
@@ -200,10 +237,12 @@ const PokemonPage = () => {
         <>
           <div className="mt-3 mx-4">
             <small
-              className="text-muted"
+              className="text-muted pokemon-count-text"
               style={{ color: "#cccccc", fontSize: "0.85rem" }}
             >
-              Showing {pokemonsToDisplay.length} of {totalFiltered} Pokémon
+              Showing {startIndex + 1}-{Math.min(endIndex, totalFiltered)} of{" "}
+              {totalFiltered} Pokémon
+              {totalPages > 1 && ` (Page ${currentPage} of ${totalPages})`}
             </small>
           </div>
           <PokemonCollection
@@ -212,21 +251,42 @@ const PokemonPage = () => {
             favorites={favorites}
             onToggleFavorite={toggleFavorite}
           />
-          {canLoadMore && (
-            <div className="d-flex justify-content-center mt-4 mb-4">
+          {totalPages > 1 && (
+            <div className="pagination-container">
               <button
-                className="device-button btn btn-lg"
-                onClick={() => setDisplayCount(displayCount + ITEMS_PER_PAGE)}
-                style={{
-                  padding: "12px 30px",
-                  fontSize: "0.9rem",
-                  fontWeight: "600",
-                  borderRadius: "8px",
-                  textTransform: "uppercase",
-                  letterSpacing: "0.5px",
-                }}
+                className="device-button pagination-btn"
+                onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
+                disabled={currentPage === 1}
               >
-                Load More Data
+                ‹ Prev
+              </button>
+
+              <div className="page-numbers">
+                {getPageNumbers().map((page, index) =>
+                  page === "..." ? (
+                    <span key={`ellipsis-${index}`} className="page-ellipsis">
+                      ...
+                    </span>
+                  ) : (
+                    <button
+                      key={page}
+                      className={`device-button pagination-btn page-number ${currentPage === page ? "active" : ""}`}
+                      onClick={() => setCurrentPage(page)}
+                    >
+                      {page}
+                    </button>
+                  ),
+                )}
+              </div>
+
+              <button
+                className="device-button pagination-btn"
+                onClick={() =>
+                  setCurrentPage(Math.min(totalPages, currentPage + 1))
+                }
+                disabled={currentPage === totalPages}
+              >
+                Next ›
               </button>
             </div>
           )}
