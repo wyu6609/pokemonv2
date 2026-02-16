@@ -21,6 +21,6 @@
 
 ## Desktop demo
 
-<p align="center"><img src = "/demo/pokemon_demo_1.gif"/></p>
+<p align="center"><img src = "demo/pokemon_demo_1.gif"/></p>
 
 
