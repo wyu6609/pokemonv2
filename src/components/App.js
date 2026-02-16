@@ -11,9 +11,9 @@ function App() {
   const [trackChanging, setTrackChanging] = useState(false);
 
   const tracks = useMemo(() => [
+    "/sounds/pokemon_littleroot.mp3",
     "/sounds/pokemon_theme.mp3",
     "/sounds/pokemon_center.mp3",
-    "/sounds/pokemon_littleroot.mp3",
   ], []);
 
   // Shuffle tracks on mount
