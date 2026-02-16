@@ -5,7 +5,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 function App() {
   const audioRef = useRef(null);
-  const [audioEnabled, setAudioEnabled] = useState(false);
+  const [audioEnabled, setAudioEnabled] = useState(true);
   const [currentTrackIndex, setCurrentTrackIndex] = useState(0);
   const [shuffledTracks, setShuffledTracks] = useState([]);
   const [trackChanging, setTrackChanging] = useState(false);
