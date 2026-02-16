@@ -1,9 +1,13 @@
 /* Pokedex Device Main Container */
 .App {
   text-align: center;
-  min-height: 100vh;
-  padding: 20px;
+  height: 100vh;
+  padding: 10px;
   position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 }
 
 /* Audio Display Animations */
@@ -32,6 +36,9 @@
 /* Pokedex Device Frame */
 .pokedex-device {
   max-width: 1400px;
+  width: 100%;
+  height: calc(100vh - 20px);
+  max-height: 1500px;
   margin: 0 auto;
   background: linear-gradient(
     145deg,
@@ -48,6 +55,8 @@
   padding: 15px;
   position: relative;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .pokedex-device::before {
@@ -98,6 +107,10 @@
     inset 0 -2px 4px rgba(0, 0, 0, 0.1),
     0 4px 12px rgba(0, 0, 0, 0.15);
   position: relative;
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
 }
 
 .pokedex-screen::before {
@@ -118,6 +131,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 10px 20px;
+  flex-shrink: 0;
   background: linear-gradient(
     145deg,
     rgba(240, 70, 85, 0.9) 0%,
@@ -204,8 +218,25 @@
   justify-content: center;
   align-items: center;
   gap: 8px;
-  margin: 30px 0 20px;
+  margin-top: auto;
+  margin-bottom: 0;
   flex-wrap: wrap;
+  position: sticky;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  width: fit-content;
+  max-width: calc(100% - 20px);
+  background: rgba(255, 255, 255, 0.98);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  padding: 12px 20px;
+  z-index: 10;
+  box-shadow: 
+    0 -4px 16px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 1),
+    0 0 0 1px rgba(0, 0, 0, 0.05);
+  border-radius: 12px 12px 0 0;
 }
 
 .pagination-btn {
@@ -260,7 +291,30 @@
 /* Device Content Area */
 .device-content {
   color: #333333;
-  padding: 10px;
+  padding: 5px 10px 10px 10px;
+  height: 100%;
+  overflow-y: auto;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+.device-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.device-content::-webkit-scrollbar-track {
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 4px;
+}
+
+.device-content::-webkit-scrollbar-thumb {
+  background: rgba(220, 53, 69, 0.4);
+  border-radius: 4px;
+}
+
+.device-content::-webkit-scrollbar-thumb:hover {
+  background: rgba(220, 53, 69, 0.6);
 }
 
 /* Device Info Display */
@@ -445,6 +499,22 @@ body.dark-mode ::-webkit-scrollbar-thumb {
 
 /* Tablet Responsive Styles */
 @media (max-width: 768px) {
+  .App {
+    padding: 10px;
+  }
+
+  .pokedex-device {
+    height: calc(100vh - 20px);
+  }
+
+  .pokedex-screen {
+    padding: 15px;
+  }
+
+  .device-content {
+    padding: 4px 8px 8px 8px;
+  }
+
   .controls-wrapper {
     gap: 8px;
     flex-wrap: nowrap;
@@ -478,17 +548,22 @@ body.dark-mode ::-webkit-scrollbar-thumb {
 
   .pagination-container {
     gap: 4px;
-    margin: 20px 0 15px;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+    padding: 10px 15px;
+    max-width: calc(100% - 16px);
+    margin: 0 auto;
+    left: auto;
+    transform: none;
+  }
+
+  .pagination-container::-webkit-scrollbar {
+    display: none;
   }
 
   .pagination-btn {
-    padding: 5px 9px !important;
-    font-size: 0.72rem !important;
-    min-width: 30px;
-    height: 28px;
+    padding: 7px 11px !important;
+    font-size: 0.75rem !important;
+    min-width: 34px;
+    height: 34px;
     flex-shrink: 0;
   }
 
@@ -497,9 +572,9 @@ body.dark-mode ::-webkit-scrollbar-thumb {
   }
 
   .page-number {
-    padding: 5px 7px !important;
-    min-width: 28px;
-    font-size: 0.72rem !important;
+    padding: 7px 9px !important;
+    min-width: 32px;
+    font-size: 0.75rem !important;
     flex-shrink: 0;
   }
 
@@ -510,6 +585,23 @@ body.dark-mode ::-webkit-scrollbar-thumb {
 
 /* Mobile Carousel Row Styling */
 @media (max-width: 576px) {
+  .App {
+    padding: 5px;
+  }
+
+  .pokedex-device {
+    height: calc(100vh - 10px);
+    padding: 10px;
+  }
+
+  .pokedex-screen {
+    padding: 10px;
+  }
+
+  .device-content {
+    padding: 3px 6px 6px 6px;
+  }
+
   .controls-wrapper {
     gap: 4px;
     flex-wrap: nowrap;
@@ -551,17 +643,26 @@ body.dark-mode ::-webkit-scrollbar-thumb {
 
   .pagination-container {
     gap: 2px;
-    margin: 15px 0 10px;
+    padding: 8px 12px;
+    max-width: calc(100% - 12px);
+    margin: 0 auto;
+    left: auto;
+    transform: none;
     flex-wrap: nowrap;
     overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .pagination-container::-webkit-scrollbar {
+    display: none;
   }
 
   .pagination-btn {
-    padding: 4px 7px !important;
-    font-size: 0.65rem !important;
-    min-width: 26px;
-    height: 26px;
+    padding: 6px 9px !important;
+    font-size: 0.7rem !important;
+    min-width: 32px;
+    height: 32px;
     flex-shrink: 0;
   }
 
@@ -571,9 +672,9 @@ body.dark-mode ::-webkit-scrollbar-thumb {
   }
 
   .page-number {
-    padding: 4px 5px !important;
-    min-width: 26px;
-    font-size: 0.65rem !important;
+    padding: 6px 7px !important;
+    min-width: 30px;
+    font-size: 0.7rem !important;
     flex-shrink: 0;
   }
 
@@ -609,6 +710,23 @@ body.dark-mode ::-webkit-scrollbar-thumb {
 
 /* Extra Small Mobile Screens (400px and below) */
 @media (max-width: 400px) {
+  .App {
+    padding: 5px;
+  }
+
+  .pokedex-device {
+    height: calc(100vh - 10px);
+    padding: 8px;
+  }
+
+  .pokedex-screen {
+    padding: 8px;
+  }
+
+  .device-content {
+    padding: 2px 5px 5px 5px;
+  }
+
   .controls-wrapper {
     gap: 3px;
   }
@@ -647,18 +765,26 @@ body.dark-mode ::-webkit-scrollbar-thumb {
 
   .pagination-container {
     gap: 2px;
-    margin: 12px 0 8px;
+    padding: 6px 10px;
+    max-width: calc(100% - 10px);
+    margin: 0 auto;
+    left: auto;
+    transform: none;
     flex-wrap: nowrap;
     overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
-    padding: 0 5px;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .pagination-container::-webkit-scrollbar {
+    display: none;
   }
 
   .pagination-btn {
-    padding: 3px 6px !important;
-    font-size: 0.6rem !important;
-    min-width: 24px;
-    height: 24px;
+    padding: 5px 8px !important;
+    font-size: 0.65rem !important;
+    min-width: 30px;
+    height: 30px;
     flex-shrink: 0;
   }
 
@@ -668,9 +794,9 @@ body.dark-mode ::-webkit-scrollbar-thumb {
   }
 
   .page-number {
-    padding: 3px 5px !important;
-    min-width: 24px;
-    font-size: 0.6rem !important;
+    padding: 5px 7px !important;
+    min-width: 28px;
+    font-size: 0.65rem !important;
     flex-shrink: 0;
   }
 

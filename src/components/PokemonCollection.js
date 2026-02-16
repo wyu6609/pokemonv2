@@ -54,7 +54,7 @@ const PokemonCollection = ({ pokemon, favorites = [], onToggleFavorite }) => {
         }}
       />
 
-      <Row className="mx-2 g-3">{cards}</Row>
+      <Row className="mx-2 g-3" style={{ paddingBottom: "20px" }}>{cards}</Row>
     </>
   );
 };
