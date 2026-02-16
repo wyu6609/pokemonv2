@@ -71,6 +71,15 @@ function App() {
     if (shuffledTracks.length === 0) return;
     const nextIndex = (currentTrackIndex + 1) % shuffledTracks.length;
     setCurrentTrackIndex(nextIndex);
+    // Explicitly play the next track for continuous playback
+    setTimeout(() => {
+      const audio = audioRef.current;
+      if (audio && audioEnabled) {
+        audio.play().catch((error) => {
+          console.log("Autoplay prevented:", error);
+        });
+      }
+    }, 100); // Small delay to ensure state has updated
   };
 
   return (
