@@ -1,8 +1,5 @@
 import React, { useState, useEffect } from "react";
 import {
-  Container,
-  Col,
-  Row,
   Modal,
   Button,
   Badge,
@@ -58,125 +55,163 @@ const PokemonModal = (props) => {
     });
   };
 
+  // Get all stats
+  const getStatName = (index) => {
+    const statNames = ['HP', 'Attack', 'Defense', 'Sp. Atk', 'Sp. Def', 'Speed'];
+    return statNames[index];
+  };
+
+  const getStatClass = (index) => {
+    const statClasses = ['hp', 'atk', 'def', 'spatk', 'spdef', 'spd'];
+    return statClasses[index];
+  };
+
   return (
     <>
       {props.modaldata ? (
         <Modal
           {...props}
-          size="lg"
+          size="sm"
           aria-labelledby="contained-modal-title-vcenter"
           centered
-          className={` ${props.modaldata.data.types[0].type.name}-text`}
+          className={`pokemon-card-modal ${props.modaldata.data.types[0].type.name}-text`}
         >
           <Modal.Header
-            className={`${props.modaldata.data.types[0].type.name} text-white `}
+            className={`${props.modaldata.data.types[0].type.name} text-white modal-header-card`}
+            closeButton
           >
             <div className="modal-header-content">
-              <Badge className="pokemon-modal-id bg-secondary p-2">{`id ${props.modaldata.data.id} `}</Badge>
+              <Badge className="pokemon-modal-id">{`#${props.modaldata.data.id}`}</Badge>
               <Modal.Title
-                className="pokemon-modal-title"
+                className="pokemon-modal-title text-uppercase"
                 id="contained-modal-title-vcenter"
               >
-                <Button
-                  className="button_hover pokemon-name-btn"
-                  onClick={() => {
-                    let url = `https://pokemon.fandom.com/wiki/${props.modaldata.data.name}`;
-                    window.open(url, "_blank");
-                  }}
-                >
-                  <span className="text-uppercase pokemon-modal-name">
-                    {props.modaldata.data.name}
-                  </span>
-                </Button>
+                {props.modaldata.data.name}
               </Modal.Title>
             </div>
           </Modal.Header>
-          <Modal.Body>
-            <Container className="pt-md-2">
-              <Row className="g-3 justify-content-center">
-                <Col xs={12} sm={10} md={8} lg={7}>
-                  <div className="pokemon-card-layout">
-                    {loading ? (
-                      <>
-                        <div className="pokemon-image-container">
-                          <img
-                            alt="Pokemon front view"
-                            className="pokemon-modal-image pokemon-front"
-                            src={
-                              props.shiny
-                                ? props.modaldata.data.sprites.front_shiny
-                                : props.modaldata.data.sprites.front_default
-                            }
-                          />
-                          <img
-                            alt="Pokemon back view"
-                            className="pokemon-modal-image pokemon-back"
-                            src={
-                              props.shiny
-                                ? props.modaldata.data.sprites.back_shiny
-                                : props.modaldata.data.sprites.back_default
-                            }
-                          />
-                          <Button
-                            variant={props.shiny ? "secondary" : "warning"}
-                            className="text-white btn-xs shiny-toggle-btn"
-                            onClick={clickHandler}
-                            size="sm"
-                          >
-                            {props.shiny ? "NORMAL FORM" : "✨ SHINY FORM"}
-                          </Button>
-                        </div>
-
-                        <div className="habitat-section">
-                          <h5 className="habitat-label">
-                            <span className="habitat-icon">🏞️</span>
-                            Habitat
-                          </h5>
-                          <p className="habitat-value">{pokemonHabitat}</p>
-                        </div>
-
-                        <div className="description-section">
-                          <h6 className="description-label">
-                            <span className="description-icon">📖</span>
-                            Pokédex Entry
-                          </h6>
-                          <p className="description-text">
-                            {pokemonDescription}
-                          </p>
-                        </div>
-                      </>
-                    ) : (
-                      <Spinner
-                        animation="border"
-                        variant="danger"
-                        className="mx-auto"
-                      >
-                        <span className="visually-hidden">Loading...</span>
-                      </Spinner>
-                    )}
+          <Modal.Body className="pokemon-card-body">
+            {loading ? (
+              <>
+                {/* Sprite Display with Shiny Toggle */}
+                <div className="sprite-wrapper">
+                  <div className="sprite-display">
+                    <div className="sprite-side front-sprite">
+                      <img
+                        alt="Pokemon front view"
+                        className="pokemon-sprite"
+                        src={
+                          props.shiny
+                            ? props.modaldata.data.sprites.front_shiny
+                            : props.modaldata.data.sprites.front_default
+                        }
+                      />
+                      <span className="sprite-label">Front</span>
+                    </div>
+                    <div className="sprite-side back-sprite">
+                      <img
+                        alt="Pokemon back view"
+                        className="pokemon-sprite"
+                        src={
+                          props.shiny
+                            ? props.modaldata.data.sprites.back_shiny
+                            : props.modaldata.data.sprites.back_default
+                        }
+                      />
+                      <span className="sprite-label">Back</span>
+                    </div>
                   </div>
-                </Col>
-              </Row>
-            </Container>
-          </Modal.Body>
-          <Modal.Footer className=" border-0">
-            {props.modaldata.data.types.map((el) => {
-              return (
-                <Button
-                  key={uuidv4()}
-                  className={`button_hover type-btn btn btn-xs text-uppercase  ${el.type.name}`}
-                  onClick={() => {
-                    console.log("click");
+                  <Button
+                    variant={props.shiny ? "dark" : "warning"}
+                    className="shiny-toggle-btn-modal"
+                    onClick={clickHandler}
+                    size="sm"
+                  >
+                    {props.shiny ? "✨ Shiny" : "Normal"}
+                  </Button>
+                </div>
 
-                    let url = `https://pokemon.fandom.com/wiki/${el.type.name}_type`;
+                {/* Type Badges */}
+                <div className="types-section-modal">
+                  {props.modaldata.data.types.map((el) => (
+                    <Badge
+                      key={uuidv4()}
+                      className={`type-badge-modal ${el.type.name}`}
+                    >
+                      {el.type.name}
+                    </Badge>
+                  ))}
+                </div>
+
+                {/* Base Stats Section */}
+                <div className="stats-section-modal">
+                  <h6 className="stats-header">Base Stats</h6>
+                  {props.modaldata.data.stats.map((stat, index) => (
+                    <div key={index} className="stat-row-modal">
+                      <span className="stat-name-modal">{getStatName(index)}</span>
+                      <div className="stat-bar-modal">
+                        <div
+                          className={`stat-fill-modal ${getStatClass(index)}`}
+                          style={{ width: `${(stat.base_stat / 255) * 100}%` }}
+                        ></div>
+                      </div>
+                      <span className="stat-value-modal">{stat.base_stat}</span>
+                    </div>
+                  ))}
+                </div>
+
+                {/* Info Section */}
+                <div className="info-section-modal">
+                  <div className="info-row-modal">
+                    <span className="info-label-modal">Height:</span>
+                    <span className="info-value-modal">
+                      {(props.modaldata.data.height / 10).toFixed(1)} m
+                    </span>
+                  </div>
+                  <div className="info-row-modal">
+                    <span className="info-label-modal">Weight:</span>
+                    <span className="info-value-modal">
+                      {(props.modaldata.data.weight / 10).toFixed(1)} kg
+                    </span>
+                  </div>
+                  <div className="info-row-modal">
+                    <span className="info-label-modal">Habitat:</span>
+                    <span className="info-value-modal text-capitalize">
+                      {pokemonHabitat}
+                    </span>
+                  </div>
+                </div>
+
+                {/* Description */}
+                <div className="description-section-modal">
+                  <p className="description-text-modal">
+                    {pokemonDescription}
+                  </p>
+                </div>
+
+                {/* Wiki Button */}
+                <Button
+                  variant="primary"
+                  className="wiki-btn-modal"
+                  onClick={() => {
+                    const url = `https://pokemon.fandom.com/wiki/${props.modaldata.data.name}`;
                     window.open(url, "_blank");
                   }}
                 >
-                  {el.type.name}
+                  📖 View on Wiki
                 </Button>
-              );
-            })}
-          </Modal.Footer>
+              </>
+            ) : (
+              <div className="text-center py-5">
+                <Spinner
+                  animation="border"
+                  variant="danger"
+                >
+                  <span className="visually-hidden">Loading...</span>
+                </Spinner>
+              </div>
+            )}
+          </Modal.Body>
         </Modal>
       ) : (
         <></>
