@@ -1,13 +1,17 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import axios from "axios";
 import Search from "./Search";
 import PokemonCollection from "./PokemonCollection";
+import Pagination from "./Pagination";
 
 import { Spinner } from "react-bootstrap";
 
 const URL_ENDPOINT = "https://pokeapi.co/api/v2/pokemon?limit=1302";
 
 const PokemonPage = () => {
+  // Ref for scroll container
+  const scrollContainerRef = useRef(null);
+
   //set pokemon state
   const [pokemon, setPokemon] = useState([]);
   //set loading
@@ -193,40 +197,13 @@ const PokemonPage = () => {
 
   // Scroll to top when page changes
   useEffect(() => {
-    window.scrollTo({ top: 0, behavior: "smooth" });
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollTo({ top: 0, behavior: "smooth" });
+    }
   }, [currentPage]);
 
-  // Generate page numbers to display
-  const getPageNumbers = () => {
-    const pages = [];
-    const maxPagesToShow = 5;
-
-    if (totalPages <= maxPagesToShow) {
-      for (let i = 1; i <= totalPages; i++) {
-        pages.push(i);
-      }
-    } else {
-      if (currentPage <= 3) {
-        for (let i = 1; i <= 4; i++) pages.push(i);
-        pages.push("...");
-        pages.push(totalPages);
-      } else if (currentPage >= totalPages - 2) {
-        pages.push(1);
-        pages.push("...");
-        for (let i = totalPages - 3; i <= totalPages; i++) pages.push(i);
-      } else {
-        pages.push(1);
-        pages.push("...");
-        for (let i = currentPage - 1; i <= currentPage + 1; i++) pages.push(i);
-        pages.push("...");
-        pages.push(totalPages);
-      }
-    }
-    return pages;
-  };
-
   return (
-    <div className="device-content">
+    <div className="device-content" ref={scrollContainerRef}>
       <Search
         searchTerm={searchTerm}
         onChangeSearch={setSearchTerm}
@@ -251,45 +228,11 @@ const PokemonPage = () => {
             favorites={favorites}
             onToggleFavorite={toggleFavorite}
           />
-          {totalPages > 1 && (
-            <div className="pagination-container">
-              <button
-                className="device-button pagination-btn"
-                onClick={() => setCurrentPage(Math.max(1, currentPage - 1))}
-                disabled={currentPage === 1}
-              >
-                ‹ Prev
-              </button>
-
-              <div className="page-numbers">
-                {getPageNumbers().map((page, index) =>
-                  page === "..." ? (
-                    <span key={`ellipsis-${index}`} className="page-ellipsis">
-                      ...
-                    </span>
-                  ) : (
-                    <button
-                      key={page}
-                      className={`device-button pagination-btn page-number ${currentPage === page ? "active" : ""}`}
-                      onClick={() => setCurrentPage(page)}
-                    >
-                      {page}
-                    </button>
-                  ),
-                )}
-              </div>
-
-              <button
-                className="device-button pagination-btn"
-                onClick={() =>
-                  setCurrentPage(Math.min(totalPages, currentPage + 1))
-                }
-                disabled={currentPage === totalPages}
-              >
-                Next ›
-              </button>
-            </div>
-          )}
+          <Pagination
+            currentPage={currentPage}
+            totalPages={totalPages}
+            onPageChange={setCurrentPage}
+          />
         </>
       ) : (
         <div className="d-flex align-items-center my-auto">
