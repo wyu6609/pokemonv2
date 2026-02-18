@@ -1,5 +1,7 @@
 /* Cross-browser compatibility fix */
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -851,14 +853,14 @@ body.dark-mode ::-webkit-scrollbar-thumb {
   .App {
     padding: 20px 120px;
   }
-  
+
   .pokedex-device {
     height: auto;
     max-height: 92vh;
     min-height: 700px;
     max-width: 1200px;
   }
-  
+
   .device-content {
     overflow-y: auto !important;
     padding: 3px 8px 5px 8px !important;
@@ -866,20 +868,20 @@ body.dark-mode ::-webkit-scrollbar-thumb {
     display: flex;
     flex-direction: column;
   }
-  
+
   .search-wrapper {
     margin-bottom: 8px !important;
   }
-  
+
   .pokemon-count-text {
     font-size: 0.7rem !important;
   }
-  
+
   .mt-3.mx-4 {
     margin-top: 0.25rem !important;
     margin-bottom: 0.25rem !important;
   }
-  
+
   .pagination-wrapper {
     position: sticky !important;
     bottom: 0 !important;
@@ -889,7 +891,7 @@ body.dark-mode ::-webkit-scrollbar-thumb {
     padding-bottom: 5px !important;
     flex-shrink: 0;
   }
-  
+
   /* Ensure cards area can shrink if needed */
   .row.g-3 {
     flex-shrink: 1;
@@ -902,12 +904,12 @@ body.dark-mode ::-webkit-scrollbar-thumb {
     flex: 0 0 calc(16.666% - 0.5rem) !important;
     max-width: calc(16.666% - 0.5rem) !important;
   }
-  
+
   .pokemon-col-5 .card.pokemon-card {
     margin: 2px !important;
     aspect-ratio: 0.75 / 1 !important;
   }
-  
+
   .pokemon-col-5 .pokemon-name-bottom {
     font-size: 0.55rem !important;
     padding: 2px 3px !important;
@@ -916,17 +918,17 @@ body.dark-mode ::-webkit-scrollbar-thumb {
     overflow: hidden !important;
     text-overflow: ellipsis !important;
   }
-  
+
   .pokemon-col-5 .pokemon-id-badge {
     font-size: 0.6rem !important;
     padding: 2px 6px !important;
   }
-  
+
   .pokemon-col-5 .favorite-icon svg {
     height: 1em !important;
     width: 1em !important;
   }
-  
+
   .row.g-3 {
     --bs-gutter-x: 0.5rem !important;
     --bs-gutter-y: 0.5rem !important;
@@ -934,7 +936,7 @@ body.dark-mode ::-webkit-scrollbar-thumb {
     margin-top: 3px !important;
     margin-bottom: 3px !important;
   }
-  
+
   .row.mx-2 {
     margin-left: 0.5rem !important;
     margin-right: 0.5rem !important;

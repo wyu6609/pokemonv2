@@ -3,6 +3,78 @@
   max-width: 420px;
 }
 
+/* Desktop Landscape Layout */
+@media (min-width: 768px) {
+  .pokemon-card-modal .modal-dialog {
+    max-width: 900px;
+  }
+
+  .pokemon-card-modal .modal-dialog-centered {
+    min-height: calc(100% - 3.5rem);
+  }
+
+  .pokemon-card-body {
+    display: grid !important;
+    grid-template-columns: 380px 1fr !important;
+    gap: 20px !important;
+    max-height: 75vh !important;
+    padding: 24px !important;
+  }
+
+  .modal-left-column {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+  }
+
+  .modal-right-column {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 16px !important;
+    overflow-y: auto !important;
+    padding-right: 8px !important;
+  }
+
+  .modal-right-column::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  .modal-right-column::-webkit-scrollbar-track {
+    background: rgba(128, 128, 128, 0.1);
+    border-radius: 3px;
+  }
+
+  .modal-right-column::-webkit-scrollbar-thumb {
+    background: rgba(128, 128, 128, 0.4);
+    border-radius: 3px;
+  }
+
+  .modal-right-column::-webkit-scrollbar-thumb:hover {
+    background: rgba(128, 128, 128, 0.6);
+  }
+
+  /* Adjust capture-gender to stack vertically in landscape */
+  .capture-gender-section-modal {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Larger Desktop - More Width */
+@media (min-width: 1200px) {
+  .pokemon-card-modal .modal-dialog {
+    max-width: 1000px;
+  }
+
+  .pokemon-card-body {
+    grid-template-columns: 420px 1fr !important;
+  }
+
+  /* Restore 2-column for capture-gender on large screens */
+  .capture-gender-section-modal {
+    grid-template-columns: 1fr 1fr !important;
+  }
+}
+
 .pokemon-card-modal .modal-content {
   background: linear-gradient(
     145deg,
@@ -66,6 +138,28 @@
   opacity: 1;
 }
 
+/* Special Badge (Legendary/Mythical) */
+.special-badge {
+  background: linear-gradient(145deg, #ffd700 0%, #ffed4e 50%, #ffd700 100%) !important;
+  color: #333 !important;
+  font-weight: 700 !important;
+  font-size: 0.7rem !important;
+  padding: 4px 10px !important;
+  border-radius: 12px !important;
+  border: 2px solid rgba(255, 215, 0, 0.5) !important;
+  box-shadow: 
+    0 0 12px rgba(255, 215, 0, 0.6),
+    inset 0 1px 2px rgba(255, 255, 255, 0.8) !important;
+  animation: shimmer 2s infinite;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+@keyframes shimmer {
+  0%, 100% { box-shadow: 0 0 12px rgba(255, 215, 0, 0.6), inset 0 1px 2px rgba(255, 255, 255, 0.8); }
+  50% { box-shadow: 0 0 20px rgba(255, 215, 0, 0.9), inset 0 1px 2px rgba(255, 255, 255, 0.8); }
+}
+
 /* Modal Body */
 .pokemon-card-body {
   padding: 20px;
@@ -90,6 +184,40 @@
 
 .pokemon-card-body::-webkit-scrollbar-thumb:hover {
   background: rgba(128, 128, 128, 0.6);
+}
+
+/* Quick Info Badges (Generation & Base Experience) */
+.quick-info-badges {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+}
+
+.gen-badge {
+  background: linear-gradient(145deg, #667eea 0%, #5568d3 100%) !important;
+  color: white !important;
+  font-weight: 600 !important;
+  font-size: 0.7rem !important;
+  padding: 4px 10px !important;
+  border-radius: 8px !important;
+  border: 1px solid rgba(102, 126, 234, 0.5) !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.exp-badge {
+  background: linear-gradient(145deg, #48bb78 0%, #38a169 100%) !important;
+  color: white !important;
+  font-weight: 600 !important;
+  font-size: 0.7rem !important;
+  padding: 4px 10px !important;
+  border-radius: 8px !important;
+  border: 1px solid rgba(72, 187, 120, 0.5) !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+  letter-spacing: 0.5px;
 }
 
 /* Sprite Wrapper */
@@ -201,6 +329,239 @@
 .type-badge-modal.dark { background: linear-gradient(145deg, #3c2d22 0%, #2e221a 100%); color: white; }
 .type-badge-modal.steel { background: linear-gradient(145deg, #aeaebc 0%, #8f8f9d 100%); color: #333; }
 .type-badge-modal.fairy { background: linear-gradient(145deg, #f9adfb 0%, #e58fe7 100%); color: #333; }
+
+/* Abilities Section */
+.abilities-section-modal {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(245, 245, 245, 0.8) 100%);
+  border: 2px solid rgba(102, 126, 234, 0.3);
+  border-radius: 12px;
+  padding: 14px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.section-header-modal {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #333;
+  margin: 0 0 10px 0;
+  text-transform: uppercase;
+  letterSpacing: 1px;
+  text-align: center;
+  padding-bottom: 8px;
+  border-bottom: 2px solid rgba(0, 0, 0, 0.1);
+}
+
+.abilities-list-modal {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.ability-badge-modal {
+  background: linear-gradient(145deg, #667eea 0%, #5568d3 100%) !important;
+  color: white !important;
+  font-weight: 600 !important;
+  font-size: 0.75rem !important;
+  padding: 6px 12px !important;
+  border-radius: 16px !important;
+  text-transform: capitalize !important;
+  letter-spacing: 0.5px;
+  border: 2px solid rgba(102, 126, 234, 0.5) !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15) !important;
+}
+
+.ability-badge-modal.hidden-ability {
+  background: linear-gradient(145deg, #ffd700 0%, #ffed4e 50%, #ffd700 100%) !important;
+  color: #333 !important;
+  border: 2px solid rgba(255, 215, 0, 0.6) !important;
+  box-shadow: 
+    0 2px 4px rgba(0, 0, 0, 0.15),
+    0 0 8px rgba(255, 215, 0, 0.4) !important;
+}
+
+.hidden-tag {
+  font-size: 0.65rem;
+  opacity: 0.9;
+}
+
+/* Capture Rate & Gender Section */
+.capture-gender-section-modal {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.capture-subsection-modal,
+.gender-subsection-modal {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(245, 245, 245, 0.8) 100%);
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  padding: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.capture-bar-wrapper-modal {
+  height: 20px;
+  background: rgba(200, 200, 200, 0.5);
+  border-radius: 10px;
+  overflow: hidden;
+  margin-bottom: 8px;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.capture-bar-fill-modal {
+  height: 100%;
+  transition: width 0.5s ease;
+  box-shadow: inset 0 2px 4px rgba(255, 255, 255, 0.3);
+}
+
+.capture-bar-fill-modal.very-easy { background: linear-gradient(90deg, #48bb78 0%, #38a169 100%); }
+.capture-bar-fill-modal.easy { background: linear-gradient(90deg, #68d391 0%, #48bb78 100%); }
+.capture-bar-fill-modal.medium { background: linear-gradient(90deg, #fbc116 0%, #d9a315 100%); }
+.capture-bar-fill-modal.hard { background: linear-gradient(90deg, #ff9500 0%, #e08300 100%); }
+.capture-bar-fill-modal.very-hard { background: linear-gradient(90deg, #ff5733 0%, #dd3f1f 100%); }
+.capture-bar-fill-modal.extreme { background: linear-gradient(90deg, #d32f2f 0%, #b71c1c 100%); }
+
+.capture-details-modal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.75rem;
+  font-weight: 600;
+}
+
+.capture-difficulty-modal {
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.capture-difficulty-modal.very-easy { color: #48bb78; }
+.capture-difficulty-modal.easy { color: #68d391; }
+.capture-difficulty-modal.medium { color: #fbc116; }
+.capture-difficulty-modal.hard { color: #ff9500; }
+.capture-difficulty-modal.very-hard { color: #ff5733; }
+.capture-difficulty-modal.extreme { color: #d32f2f; }
+
+.capture-probability-modal {
+  background: rgba(0, 0, 0, 0.1);
+  padding: 2px 8px;
+  border-radius: 8px;
+  color: #333;
+}
+
+/* Gender Ratio */
+.genderless-text-modal {
+  text-align: center;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: #666;
+  padding: 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.gender-bar-wrapper-modal {
+  display: flex;
+  height: 32px;
+  border-radius: 8px;
+  overflow: hidden;
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  box-shadow: inset 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.gender-bar-male-modal,
+.gender-bar-female-modal {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: white;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  transition: width 0.5s ease;
+}
+
+.gender-bar-male-modal {
+  background: linear-gradient(90deg, #4299e1 0%, #3182ce 100%);
+}
+
+.gender-bar-female-modal {
+  background: linear-gradient(90deg, #ed64a6 0%, #d53f8c 100%);
+}
+
+/* Type Effectiveness Section */
+.type-effectiveness-section-modal {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(245, 245, 245, 0.8) 100%);
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  padding: 14px;
+  margin-bottom: 16px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+}
+
+.effectiveness-row-modal {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.effectiveness-row-modal:last-child {
+  margin-bottom: 0;
+}
+
+.effectiveness-label-modal {
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  min-width: 70px;
+  flex-shrink: 0;
+}
+
+.weakness-label { color: #d32f2f; }
+.resistance-label { color: #48bb78; }
+.immunity-label { color: #667eea; }
+
+.effectiveness-types-modal {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.type-badge-small-modal {
+  font-size: 0.65rem !important;
+  font-weight: 600 !important;
+  padding: 3px 8px !important;
+  border-radius: 12px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px;
+  border: 1px solid rgba(0, 0, 0, 0.15) !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1) !important;
+}
+
+/* Type Badge Small Colors */
+.type-badge-small-modal.normal { background: linear-gradient(145deg, #c7bfb8 0%, #a9a3a0 100%) !important; color: #333 !important; }
+.type-badge-small-modal.fire { background: linear-gradient(145deg, #f63807 0%, #d63007 100%) !important; color: white !important; }
+.type-badge-small-modal.water { background: linear-gradient(145deg, #2c97ff 0%, #1f7fd9 100%) !important; color: white !important; }
+.type-badge-small-modal.electric { background: linear-gradient(145deg, #fbc116 0%, #d9a315 100%) !important; color: #333 !important; }
+.type-badge-small-modal.grass { background: linear-gradient(145deg, #73c233 0%, #5fa42a 100%) !important; color: white !important; }
+.type-badge-small-modal.ice { background: linear-gradient(145deg, #a7e8fd 0%, #85d0f5 100%) !important; color: #333 !important; }
+.type-badge-small-modal.fighting { background: linear-gradient(145deg, #7b250c 0%, #5f1c09 100%) !important; color: white !important; }
+.type-badge-small-modal.poison { background: linear-gradient(145deg, #924193 0%, #743475 100%) !important; color: white !important; }
+.type-badge-small-modal.ground { background: linear-gradient(145deg, #d3b055 0%, #b39547 100%) !important; color: #333 !important; }
+.type-badge-small-modal.flying { background: linear-gradient(145deg, #98a8f4 0%, #7a8fe5 100%) !important; color: white !important; }
+.type-badge-small-modal.psychic { background: linear-gradient(145deg, #ed447e 0%, #d03668 100%) !important; color: white !important; }
+.type-badge-small-modal.bug { background: linear-gradient(145deg, #9dab18 0%, #7f8c14 100%) !important; color: white !important; }
+.type-badge-small-modal.rock { background: linear-gradient(145deg, #b99d4d 0%, #9a833f 100%) !important; color: white !important; }
+.type-badge-small-modal.ghost { background: linear-gradient(145deg, #5d5eb0 0%, #4a4b8e 100%) !important; color: white !important; }
+.type-badge-small-modal.dragon { background: linear-gradient(145deg, #6f59dd 0%, #5847b8 100%) !important; color: white !important; }
+.type-badge-small-modal.dark { background: linear-gradient(145deg, #3c2d22 0%, #2e221a 100%) !important; color: white !important; }
+.type-badge-small-modal.steel { background: linear-gradient(145deg, #aeaebc 0%, #8f8f9d 100%) !important; color: #333 !important; }
+.type-badge-small-modal.fairy { background: linear-gradient(145deg, #f9adfb 0%, #e58fe7 100%) !important; color: #333 !important; }
 
 /* Stats Section */
 .stats-section-modal {
@@ -1231,5 +1592,103 @@ body.dark-mode .btn-close {
   .description-text {
     font-size: 0.9rem;
     line-height: 1.6;
+  }
+}
+/* Mobile Responsiveness for New Sections */
+@media (max-width: 576px) {
+  .pokemon-card-modal .modal-dialog {
+    max-width: 95vw;
+    margin: 0.5rem auto;
+  }
+
+  .pokemon-card-body {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+    padding: 16px !important;
+  }
+
+  .modal-left-column,
+  .modal-right-column {
+    display: flex !important;
+    flex-direction: column !important;
+    gap: 12px !important;
+  }
+
+  .special-badge {
+    font-size: 0.6rem !important;
+    padding: 3px 8px !important;
+  }
+
+  .quick-info-badges {
+    gap: 6px;
+    margin-bottom: 10px;
+  }
+
+  .gen-badge,
+  .exp-badge {
+    font-size: 0.65rem !important;
+    padding: 3px 8px !important;
+  }
+
+  .abilities-section-modal {
+    padding: 10px;
+    margin-bottom: 12px;
+  }
+
+  .section-header-modal {
+    font-size: 0.75rem;
+    margin-bottom: 8px;
+  }
+
+  .ability-badge-modal {
+    font-size: 0.7rem !important;
+    padding: 5px 10px !important;
+  }
+
+  .capture-gender-section-modal {
+    grid-template-columns: 1fr;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .capture-subsection-modal,
+  .gender-subsection-modal {
+    padding: 10px;
+  }
+
+  .capture-details-modal {
+    font-size: 0.7rem;
+  }
+
+  .gender-bar-wrapper-modal {
+    height: 28px;
+  }
+
+  .gender-bar-male-modal,
+  .gender-bar-female-modal {
+    font-size: 0.7rem;
+  }
+
+  .type-effectiveness-section-modal {
+    padding: 10px;
+    margin-bottom: 12px;
+  }
+
+  .effectiveness-row-modal {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+    margin-bottom: 12px;
+  }
+
+  .effectiveness-label-modal {
+    font-size: 0.7rem;
+    min-width: unset;
+  }
+
+  .type-badge-small-modal {
+    font-size: 0.6rem !important;
+    padding: 2px 6px !important;
   }
 }

@@ -152,7 +152,10 @@ const PokemonCard = ({
         )}
       </span>
 
-      <Card.Body className="p-2 pokemon-image-container" style={{ paddingTop: "0.5rem", paddingBottom: "3rem" }}>
+      <Card.Body
+        className="p-2 pokemon-image-container"
+        style={{ paddingTop: "0.5rem", paddingBottom: "3rem" }}
+      >
         <Card.Img
           className="pokemon-image rounded-3"
           variant="top"
