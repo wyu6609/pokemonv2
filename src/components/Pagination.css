@@ -3,7 +3,7 @@
   bottom: 0;
   left: 0;
   right: 0;
-  z-index: 15;
+  z-index: 100;
   margin-top: 10px;
   padding: 0 10px 10px 10px;
   pointer-events: none;
