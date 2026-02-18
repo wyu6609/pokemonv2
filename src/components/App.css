@@ -1197,7 +1197,7 @@ body.dark-mode ::-webkit-scrollbar-thumb {
   transition: all 0.3s ease;
   margin: 0 auto;
   width: fit-content;
-  box-shadow: 
+  box-shadow:
     0 2px 6px rgba(0, 0, 0, 0.2),
     inset 0 1px 2px rgba(255, 255, 255, 0.1);
 }
@@ -1206,7 +1206,7 @@ body.dark-mode ::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.15);
   border-color: rgba(255, 255, 255, 0.25);
   transform: translateY(-2px);
-  box-shadow: 
+  box-shadow:
     0 4px 12px rgba(0, 0, 0, 0.3),
     inset 0 1px 2px rgba(255, 255, 255, 0.15);
   text-decoration: none;
@@ -1237,8 +1237,9 @@ body.dark-mode ::-webkit-scrollbar-thumb {
 @media (max-width: 576px) {
   .Toastify__toast-container {
     width: 95vw !important;
+    top: 50% !important;
     left: 50% !important;
-    transform: translateX(-50%) !important;
+    transform: translate(-50%, -50%) !important;
     padding: 0 !important;
   }
 
@@ -1323,5 +1324,145 @@ body.dark-mode ::-webkit-scrollbar-thumb {
   .pokedex-title-toast .Toastify__close-button {
     right: 8px !important;
     top: 8px !important;
+  }
+}
+
+/* Pokeball Loader Styles */
+.pokedex-loader-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 400px;
+  width: 100%;
+  padding: 20px;
+}
+
+.pokedex-loader {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.pokeball-loader {
+  width: 80px;
+  height: 80px;
+  position: relative;
+  animation: spinPokeball 1.2s linear infinite;
+}
+
+.pokeball-svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 4px 12px rgba(220, 53, 69, 0.3));
+}
+
+.pokeball-top {
+  transform-origin: center;
+}
+
+.pokeball-bottom {
+  clip-path: polygon(0 50%, 100% 50%, 100% 100%, 0 100%);
+}
+
+@keyframes spinPokeball {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.loader-text {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #dc3545;
+  letter-spacing: 0.5px;
+}
+
+.loading-dots::after {
+  content: "";
+  animation: loadingDots 1.5s steps(4, end) infinite;
+}
+
+@keyframes loadingDots {
+  0%,
+  20% {
+    content: "";
+  }
+  40% {
+    content: ".";
+  }
+  60% {
+    content: "..";
+  }
+  80%,
+  100% {
+    content: "...";
+  }
+}
+
+/* Modal Pokeball Loader (compact version) */
+.modal-pokeball-loader-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 300px;
+  padding: 40px 20px;
+}
+
+.modal-pokeball-loader {
+  width: 60px;
+  height: 60px;
+  position: relative;
+  animation: spinPokeball 1.2s linear infinite;
+}
+
+.modal-pokeball-loader .pokeball-svg {
+  width: 100%;
+  height: 100%;
+  filter: drop-shadow(0 3px 8px rgba(220, 53, 69, 0.3));
+}
+
+/* Responsive sizing */
+@media (min-width: 768px) {
+  .pokeball-loader {
+    width: 100px;
+    height: 100px;
+  }
+
+  .loader-text {
+    font-size: 1.1rem;
+  }
+
+  .modal-pokeball-loader {
+    width: 70px;
+    height: 70px;
+  }
+}
+
+@media (max-width: 576px) {
+  .pokedex-loader-container {
+    min-height: 300px;
+  }
+
+  .pokeball-loader {
+    width: 70px;
+    height: 70px;
+  }
+
+  .loader-text {
+    font-size: 0.9rem;
+  }
+
+  .modal-pokeball-loader {
+    width: 50px;
+    height: 50px;
+  }
+
+  .modal-pokeball-loader-container {
+    min-height: 250px;
+    padding: 30px 15px;
   }
 }

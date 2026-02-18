@@ -140,9 +140,9 @@ function App() {
               strokeLinejoin="round"
               className="toast-pokeapi-icon"
             >
-              <circle cx="12" cy="12" r="10"/>
-              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-              <path d="M2 12h20"/>
+              <circle cx="12" cy="12" r="10" />
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
+              <path d="M2 12h20" />
             </svg>
             <span className="toast-pokeapi-text">Powered by PokéAPI</span>
           </a>
@@ -156,21 +156,15 @@ function App() {
           draggable: false,
           className: "pokedex-title-toast",
           toastId: "pokedex-title",
-        },
-      );
-
-      // Music toast - top center
-      toast.info(
-        "🔇 Music is muted. Click the speaker button to enjoy Pokemon background music!",
-        {
-          containerId: "top-toast",
-          autoClose: 3000,
-          hideProgressBar: true,
-          closeOnClick: true,
-          pauseOnHover: true,
-          draggable: true,
-          theme: "colored",
-          toastId: "music-toast",
+          onClose: () => {
+            const audio = audioRef.current;
+            if (audio && !audioEnabled) {
+              setAudioEnabled(true);
+              audio.play().catch((error) => {
+                console.log("Autoplay prevented:", error);
+              });
+            }
+          },
         },
       );
     }, 500);

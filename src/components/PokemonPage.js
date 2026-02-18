@@ -4,8 +4,6 @@ import Search from "./Search";
 import PokemonCollection from "./PokemonCollection";
 import Pagination from "./Pagination";
 
-import { Spinner } from "react-bootstrap";
-
 const URL_ENDPOINT = "https://pokeapi.co/api/v2/pokemon?limit=1302";
 
 const PokemonPage = () => {
@@ -235,15 +233,40 @@ const PokemonPage = () => {
           />
         </>
       ) : (
-        <div className="d-flex align-items-center my-auto">
-          <Spinner
-            style={{ width: "10", height: "10" }}
-            animation="border"
-            variant="danger"
-            className="mx-auto"
-          >
-            <span className="visually-hidden">Loading...</span>
-          </Spinner>
+        <div className="pokedex-loader-container">
+          <div className="pokedex-loader">
+            <div className="pokeball-loader">
+              <svg viewBox="0 0 100 100" className="pokeball-svg">
+                <circle
+                  cx="50"
+                  cy="50"
+                  r="45"
+                  fill="#dc3545"
+                  className="pokeball-top"
+                />
+                <circle
+                  cx="50"
+                  cy="50"
+                  r="45"
+                  fill="white"
+                  className="pokeball-bottom"
+                />
+                <rect x="0" y="45" width="100" height="10" fill="#1a1a1a" />
+                <circle
+                  cx="50"
+                  cy="50"
+                  r="15"
+                  fill="white"
+                  stroke="#1a1a1a"
+                  strokeWidth="3"
+                />
+                <circle cx="50" cy="50" r="8" fill="#ffd700" />
+              </svg>
+            </div>
+            <div className="loader-text">
+              <span className="loading-dots">Searching Pokédex</span>
+            </div>
+          </div>
         </div>
       )}
     </div>

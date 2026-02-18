@@ -1,10 +1,5 @@
 import React, { useState, useEffect } from "react";
-import {
-  Modal,
-  Button,
-  Badge,
-  Spinner,
-} from "react-bootstrap";
+import { Modal, Button, Badge } from "react-bootstrap";
 import "./PokemonModal.css";
 import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
@@ -46,18 +41,18 @@ const PokemonModal = (props) => {
       let englishDescriptionObj = response.data.flavor_text_entries.find(
         function (obj) {
           return obj.language.name === "en";
-        }
+        },
       );
 
       let englishDescription = englishDescriptionObj.flavor_text.replace(
         "\f",
-        " "
+        " ",
       );
 
       setPokemonDescription(englishDescription);
 
       setPokemonHabitat(
-        response.data.habitat ? response.data.habitat.name : "Unknown"
+        response.data.habitat ? response.data.habitat.name : "Unknown",
       );
 
       // Set capture rate
@@ -80,19 +75,26 @@ const PokemonModal = (props) => {
 
   // Get all stats
   const getStatName = (index) => {
-    const statNames = ['HP', 'Attack', 'Defense', 'Sp. Atk', 'Sp. Def', 'Speed'];
+    const statNames = [
+      "HP",
+      "Attack",
+      "Defense",
+      "Sp. Atk",
+      "Sp. Def",
+      "Speed",
+    ];
     return statNames[index];
   };
 
   const getStatClass = (index) => {
-    const statClasses = ['hp', 'atk', 'def', 'spatk', 'spdef', 'spd'];
+    const statClasses = ["hp", "atk", "def", "spatk", "spdef", "spd"];
     return statClasses[index];
   };
 
   // Calculate catch probability
   const getCatchProbability = (captureRate) => {
     // Simplified calculation (full health, standard pokeball, no status)
-    const probability = ((captureRate / 3) / 255) * 100;
+    const probability = (captureRate / 3 / 255) * 100;
     return probability.toFixed(1);
   };
 
@@ -116,36 +118,120 @@ const PokemonModal = (props) => {
 
   // Type effectiveness chart
   const typeChart = {
-    normal: { weaknesses: ['fighting'], resistances: [], immunities: ['ghost'] },
-    fire: { weaknesses: ['water', 'ground', 'rock'], resistances: ['fire', 'grass', 'ice', 'bug', 'steel', 'fairy'], immunities: [] },
-    water: { weaknesses: ['electric', 'grass'], resistances: ['fire', 'water', 'ice', 'steel'], immunities: [] },
-    electric: { weaknesses: ['ground'], resistances: ['electric', 'flying', 'steel'], immunities: [] },
-    grass: { weaknesses: ['fire', 'ice', 'poison', 'flying', 'bug'], resistances: ['water', 'electric', 'grass', 'ground'], immunities: [] },
-    ice: { weaknesses: ['fire', 'fighting', 'rock', 'steel'], resistances: ['ice'], immunities: [] },
-    fighting: { weaknesses: ['flying', 'psychic', 'fairy'], resistances: ['bug', 'rock', 'dark'], immunities: [] },
-    poison: { weaknesses: ['ground', 'psychic'], resistances: ['grass', 'fighting', 'poison', 'bug', 'fairy'], immunities: [] },
-    ground: { weaknesses: ['water', 'grass', 'ice'], resistances: ['poison', 'rock'], immunities: ['electric'] },
-    flying: { weaknesses: ['electric', 'ice', 'rock'], resistances: ['grass', 'fighting', 'bug'], immunities: ['ground'] },
-    psychic: { weaknesses: ['bug', 'ghost', 'dark'], resistances: ['fighting', 'psychic'], immunities: [] },
-    bug: { weaknesses: ['fire', 'flying', 'rock'], resistances: ['grass', 'fighting', 'ground'], immunities: [] },
-    rock: { weaknesses: ['water', 'grass', 'fighting', 'ground', 'steel'], resistances: ['normal', 'fire', 'poison', 'flying'], immunities: [] },
-    ghost: { weaknesses: ['ghost', 'dark'], resistances: ['poison', 'bug'], immunities: ['normal', 'fighting'] },
-    dragon: { weaknesses: ['ice', 'dragon', 'fairy'], resistances: ['fire', 'water', 'electric', 'grass'], immunities: [] },
-    dark: { weaknesses: ['fighting', 'bug', 'fairy'], resistances: ['ghost', 'dark'], immunities: ['psychic'] },
-    steel: { weaknesses: ['fire', 'fighting', 'ground'], resistances: ['normal', 'grass', 'ice', 'flying', 'psychic', 'bug', 'rock', 'dragon', 'steel', 'fairy'], immunities: ['poison'] },
-    fairy: { weaknesses: ['poison', 'steel'], resistances: ['fighting', 'bug', 'dark'], immunities: ['dragon'] }
+    normal: {
+      weaknesses: ["fighting"],
+      resistances: [],
+      immunities: ["ghost"],
+    },
+    fire: {
+      weaknesses: ["water", "ground", "rock"],
+      resistances: ["fire", "grass", "ice", "bug", "steel", "fairy"],
+      immunities: [],
+    },
+    water: {
+      weaknesses: ["electric", "grass"],
+      resistances: ["fire", "water", "ice", "steel"],
+      immunities: [],
+    },
+    electric: {
+      weaknesses: ["ground"],
+      resistances: ["electric", "flying", "steel"],
+      immunities: [],
+    },
+    grass: {
+      weaknesses: ["fire", "ice", "poison", "flying", "bug"],
+      resistances: ["water", "electric", "grass", "ground"],
+      immunities: [],
+    },
+    ice: {
+      weaknesses: ["fire", "fighting", "rock", "steel"],
+      resistances: ["ice"],
+      immunities: [],
+    },
+    fighting: {
+      weaknesses: ["flying", "psychic", "fairy"],
+      resistances: ["bug", "rock", "dark"],
+      immunities: [],
+    },
+    poison: {
+      weaknesses: ["ground", "psychic"],
+      resistances: ["grass", "fighting", "poison", "bug", "fairy"],
+      immunities: [],
+    },
+    ground: {
+      weaknesses: ["water", "grass", "ice"],
+      resistances: ["poison", "rock"],
+      immunities: ["electric"],
+    },
+    flying: {
+      weaknesses: ["electric", "ice", "rock"],
+      resistances: ["grass", "fighting", "bug"],
+      immunities: ["ground"],
+    },
+    psychic: {
+      weaknesses: ["bug", "ghost", "dark"],
+      resistances: ["fighting", "psychic"],
+      immunities: [],
+    },
+    bug: {
+      weaknesses: ["fire", "flying", "rock"],
+      resistances: ["grass", "fighting", "ground"],
+      immunities: [],
+    },
+    rock: {
+      weaknesses: ["water", "grass", "fighting", "ground", "steel"],
+      resistances: ["normal", "fire", "poison", "flying"],
+      immunities: [],
+    },
+    ghost: {
+      weaknesses: ["ghost", "dark"],
+      resistances: ["poison", "bug"],
+      immunities: ["normal", "fighting"],
+    },
+    dragon: {
+      weaknesses: ["ice", "dragon", "fairy"],
+      resistances: ["fire", "water", "electric", "grass"],
+      immunities: [],
+    },
+    dark: {
+      weaknesses: ["fighting", "bug", "fairy"],
+      resistances: ["ghost", "dark"],
+      immunities: ["psychic"],
+    },
+    steel: {
+      weaknesses: ["fire", "fighting", "ground"],
+      resistances: [
+        "normal",
+        "grass",
+        "ice",
+        "flying",
+        "psychic",
+        "bug",
+        "rock",
+        "dragon",
+        "steel",
+        "fairy",
+      ],
+      immunities: ["poison"],
+    },
+    fairy: {
+      weaknesses: ["poison", "steel"],
+      resistances: ["fighting", "bug", "dark"],
+      immunities: ["dragon"],
+    },
   };
 
   // Calculate combined type effectiveness
   const getTypeEffectiveness = () => {
-    if (!props.modaldata) return { weaknesses: [], resistances: [], immunities: [] };
-    
-    const types = props.modaldata.data.types.map(t => t.type.name);
+    if (!props.modaldata)
+      return { weaknesses: [], resistances: [], immunities: [] };
+
+    const types = props.modaldata.data.types.map((t) => t.type.name);
     let allWeaknesses = [];
     let allResistances = [];
     let allImmunities = [];
 
-    types.forEach(type => {
+    types.forEach((type) => {
       if (typeChart[type]) {
         allWeaknesses.push(...typeChart[type].weaknesses);
         allResistances.push(...typeChart[type].resistances);
@@ -154,18 +240,22 @@ const PokemonModal = (props) => {
     });
 
     // Remove duplicates and immunities from weaknesses/resistances
-    const weaknesses = [...new Set(allWeaknesses)].filter(w => !allImmunities.includes(w));
-    const resistances = [...new Set(allResistances)].filter(r => !allImmunities.includes(r));
+    const weaknesses = [...new Set(allWeaknesses)].filter(
+      (w) => !allImmunities.includes(w),
+    );
+    const resistances = [...new Set(allResistances)].filter(
+      (r) => !allImmunities.includes(r),
+    );
     const immunities = [...new Set(allImmunities)];
 
     // Remove overlapping weaknesses/resistances (they cancel out for dual types)
-    const finalWeaknesses = weaknesses.filter(w => !resistances.includes(w));
-    const finalResistances = resistances.filter(r => !weaknesses.includes(r));
+    const finalWeaknesses = weaknesses.filter((w) => !resistances.includes(w));
+    const finalResistances = resistances.filter((r) => !weaknesses.includes(r));
 
     return {
       weaknesses: finalWeaknesses,
       resistances: finalResistances,
-      immunities: immunities
+      immunities: immunities,
     };
   };
 
@@ -193,7 +283,7 @@ const PokemonModal = (props) => {
               </Modal.Title>
               {(isLegendary || isMythical) && (
                 <Badge className="special-badge">
-                  {isMythical ? '✨ Mythical' : '👑 Legendary'}
+                  {isMythical ? "✨ Mythical" : "👑 Legendary"}
                 </Badge>
               )}
             </div>
@@ -203,15 +293,30 @@ const PokemonModal = (props) => {
               <>
                 {/* LEFT COLUMN - Visual & Primary Info */}
                 <div className="modal-left-column">
-                  {/* Generation & Base Experience Badge */}
-                  <div className="quick-info-badges">
-                    <Badge className="gen-badge">Gen {generation}</Badge>
-                    <Badge className="exp-badge">
-                      Base EXP: {props.modaldata.data.base_experience || 'N/A'}
-                    </Badge>
+                  {/* Type Badges - Clickable to open type page */}
+                  <div className="types-section-modal">
+                    {props.modaldata.data.types.map((el) => (
+                      <Badge
+                        key={uuidv4()}
+                        className={`type-badge-modal ${el.type.name}`}
+                        style={{ cursor: "pointer" }}
+                        onClick={() => {
+                          const typeName =
+                            el.type.name.charAt(0).toUpperCase() +
+                            el.type.name.slice(1);
+                          window.open(
+                            `https://pokemon.fandom.com/wiki/${typeName}_type`,
+                            "_blank",
+                          );
+                        }}
+                        title={`Click to view ${el.type.name} type info`}
+                      >
+                        {el.type.name}
+                      </Badge>
+                    ))}
                   </div>
 
-                  {/* Sprite Display with Shiny Toggle */}
+                  {/* Sprite Display with Shiny Toggle - Larger Images */}
                   <div className="sprite-wrapper">
                     <div className="sprite-display">
                       <div className="sprite-side front-sprite">
@@ -249,16 +354,19 @@ const PokemonModal = (props) => {
                     </Button>
                   </div>
 
-                  {/* Type Badges */}
-                  <div className="types-section-modal">
-                    {props.modaldata.data.types.map((el) => (
-                      <Badge
-                        key={uuidv4()}
-                        className={`type-badge-modal ${el.type.name}`}
-                      >
-                        {el.type.name}
-                      </Badge>
-                    ))}
+                  {/* Description - Moved under images */}
+                  <div className="description-section-modal">
+                    <p className="description-text-modal">
+                      {pokemonDescription}
+                    </p>
+                  </div>
+
+                  {/* Generation & Base Experience Badge */}
+                  <div className="quick-info-badges">
+                    <Badge className="gen-badge">Gen {generation}</Badge>
+                    <Badge className="exp-badge">
+                      Base EXP: {props.modaldata.data.base_experience || "N/A"}
+                    </Badge>
                   </div>
 
                   {/* Abilities Section */}
@@ -268,148 +376,18 @@ const PokemonModal = (props) => {
                       {props.modaldata.data.abilities.map((ability) => (
                         <Badge
                           key={uuidv4()}
-                          className={`ability-badge-modal ${ability.is_hidden ? 'hidden-ability' : ''}`}
+                          className={`ability-badge-modal ${ability.is_hidden ? "hidden-ability" : ""}`}
                         >
-                          {ability.ability.name.replace(/-/g, ' ')}
-                          {ability.is_hidden && <span className="hidden-tag"> (Hidden)</span>}
+                          {ability.ability.name.replace(/-/g, " ")}
+                          {ability.is_hidden && (
+                            <span className="hidden-tag"> (Hidden)</span>
+                          )}
                         </Badge>
                       ))}
                     </div>
                   </div>
 
-                  {/* Description */}
-                  <div className="description-section-modal">
-                    <p className="description-text-modal">
-                      {pokemonDescription}
-                    </p>
-                  </div>
-
-                  {/* Wiki Button */}
-                  <Button
-                    variant="primary"
-                    className="wiki-btn-modal"
-                    onClick={() => {
-                      const url = `https://pokemon.fandom.com/wiki/${props.modaldata.data.name}`;
-                      window.open(url, "_blank");
-                    }}
-                  >
-                    📖 View on Wiki
-                  </Button>
-                </div>
-
-                {/* RIGHT COLUMN - Stats & Battle Info */}
-                <div className="modal-right-column">
-                  {/* Capture Rate & Gender Section */}
-                  <div className="capture-gender-section-modal">
-                    <div className="capture-subsection-modal">
-                      <h6 className="section-header-modal">Catch Rate</h6>
-                      <div className="capture-info-modal">
-                        <div className="capture-bar-wrapper-modal">
-                          <div
-                            className={`capture-bar-fill-modal ${getCatchDifficulty(captureRate).class}`}
-                            style={{ width: `${(captureRate / 255) * 100}%` }}
-                          ></div>
-                        </div>
-                        <div className="capture-details-modal">
-                          <span className={`capture-difficulty-modal ${getCatchDifficulty(captureRate).class}`}>
-                            {getCatchDifficulty(captureRate).label}
-                          </span>
-                          <span className="capture-probability-modal">
-                            ~{getCatchProbability(captureRate)}%
-                          </span>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="gender-subsection-modal">
-                      <h6 className="section-header-modal">Gender Ratio</h6>
-                      {getGenderRatios(genderRatio).genderless ? (
-                        <div className="genderless-text-modal">Genderless</div>
-                      ) : (
-                        <div className="gender-bar-wrapper-modal">
-                          <div
-                            className="gender-bar-male-modal"
-                            style={{ width: `${getGenderRatios(genderRatio).male}%` }}
-                          >
-                            {getGenderRatios(genderRatio).male > 15 && (
-                              <span>♂ {getGenderRatios(genderRatio).male.toFixed(0)}%</span>
-                            )}
-                          </div>
-                          <div
-                            className="gender-bar-female-modal"
-                            style={{ width: `${getGenderRatios(genderRatio).female}%` }}
-                          >
-                            {getGenderRatios(genderRatio).female > 15 && (
-                              <span>♀ {getGenderRatios(genderRatio).female.toFixed(0)}%</span>
-                            )}
-                          </div>
-                        </div>
-                      )}
-                    </div>
-                  </div>
-
-                  {/* Type Effectiveness Section */}
-                  <div className="type-effectiveness-section-modal">
-                    <h6 className="section-header-modal">Type Effectiveness</h6>
-                    
-                    {getTypeEffectiveness().weaknesses.length > 0 && (
-                      <div className="effectiveness-row-modal">
-                        <span className="effectiveness-label-modal weakness-label">Weak To:</span>
-                        <div className="effectiveness-types-modal">
-                          {getTypeEffectiveness().weaknesses.map((type) => (
-                            <Badge key={type} className={`type-badge-small-modal ${type}`}>
-                              {type}
-                            </Badge>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-
-                    {getTypeEffectiveness().resistances.length > 0 && (
-                      <div className="effectiveness-row-modal">
-                        <span className="effectiveness-label-modal resistance-label">Resists:</span>
-                        <div className="effectiveness-types-modal">
-                          {getTypeEffectiveness().resistances.map((type) => (
-                            <Badge key={type} className={`type-badge-small-modal ${type}`}>
-                              {type}
-                            </Badge>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-
-                    {getTypeEffectiveness().immunities.length > 0 && (
-                      <div className="effectiveness-row-modal">
-                        <span className="effectiveness-label-modal immunity-label">Immune To:</span>
-                        <div className="effectiveness-types-modal">
-                          {getTypeEffectiveness().immunities.map((type) => (
-                            <Badge key={type} className={`type-badge-small-modal ${type}`}>
-                              {type}
-                            </Badge>
-                          ))}
-                        </div>
-                      </div>
-                    )}
-                  </div>
-
-                  {/* Base Stats Section */}
-                  <div className="stats-section-modal">
-                    <h6 className="stats-header">Base Stats</h6>
-                    {props.modaldata.data.stats.map((stat, index) => (
-                      <div key={index} className="stat-row-modal">
-                        <span className="stat-name-modal">{getStatName(index)}</span>
-                        <div className="stat-bar-modal">
-                          <div
-                            className={`stat-fill-modal ${getStatClass(index)}`}
-                            style={{ width: `${(stat.base_stat / 255) * 100}%` }}
-                          ></div>
-                        </div>
-                        <span className="stat-value-modal">{stat.base_stat}</span>
-                      </div>
-                    ))}
-                  </div>
-
-                  {/* Info Section */}
+                  {/* Info Section - Physical Stats */}
                   <div className="info-section-modal">
                     <div className="info-row-modal">
                       <span className="info-label-modal">Height:</span>
@@ -430,16 +408,197 @@ const PokemonModal = (props) => {
                       </span>
                     </div>
                   </div>
+
+                  {/* Wiki Button */}
+                  <Button
+                    variant="primary"
+                    className="wiki-btn-modal"
+                    onClick={() => {
+                      const url = `https://pokemon.fandom.com/wiki/${props.modaldata.data.name}`;
+                      window.open(url, "_blank");
+                    }}
+                  >
+                    📖 View on Wiki
+                  </Button>
+                </div>
+
+                {/* RIGHT COLUMN - Stats & Battle Info */}
+                <div className="modal-right-column">
+                  {/* Base Stats Section - Moved to Top */}
+                  <div className="stats-section-modal">
+                    <h6 className="stats-header">Base Stats</h6>
+                    {props.modaldata.data.stats.map((stat, index) => (
+                      <div key={index} className="stat-row-modal">
+                        <span className="stat-name-modal">
+                          {getStatName(index)}
+                        </span>
+                        <div className="stat-bar-modal">
+                          <div
+                            className={`stat-fill-modal ${getStatClass(index)}`}
+                            style={{
+                              width: `${(stat.base_stat / 255) * 100}%`,
+                            }}
+                          ></div>
+                        </div>
+                        <span className="stat-value-modal">
+                          {stat.base_stat}
+                        </span>
+                      </div>
+                    ))}
+                  </div>
+
+                  {/* Type Effectiveness Section */}
+                  <div className="type-effectiveness-section-modal">
+                    <h6 className="section-header-modal">Type Effectiveness</h6>
+
+                    {getTypeEffectiveness().weaknesses.length > 0 && (
+                      <div className="effectiveness-row-modal">
+                        <span className="effectiveness-label-modal weakness-label">
+                          Weak To:
+                        </span>
+                        <div className="effectiveness-types-modal">
+                          {getTypeEffectiveness().weaknesses.map((type) => (
+                            <Badge
+                              key={type}
+                              className={`type-badge-small-modal ${type}`}
+                            >
+                              {type}
+                            </Badge>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {getTypeEffectiveness().resistances.length > 0 && (
+                      <div className="effectiveness-row-modal">
+                        <span className="effectiveness-label-modal resistance-label">
+                          Resists:
+                        </span>
+                        <div className="effectiveness-types-modal">
+                          {getTypeEffectiveness().resistances.map((type) => (
+                            <Badge
+                              key={type}
+                              className={`type-badge-small-modal ${type}`}
+                            >
+                              {type}
+                            </Badge>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+
+                    {getTypeEffectiveness().immunities.length > 0 && (
+                      <div className="effectiveness-row-modal">
+                        <span className="effectiveness-label-modal immunity-label">
+                          Immune To:
+                        </span>
+                        <div className="effectiveness-types-modal">
+                          {getTypeEffectiveness().immunities.map((type) => (
+                            <Badge
+                              key={type}
+                              className={`type-badge-small-modal ${type}`}
+                            >
+                              {type}
+                            </Badge>
+                          ))}
+                        </div>
+                      </div>
+                    )}
+                  </div>
+
+                  {/* Capture Rate & Gender Section */}
+                  <div className="capture-gender-section-modal">
+                    <div className="capture-subsection-modal">
+                      <h6 className="section-header-modal">Catch Rate</h6>
+                      <div className="capture-info-modal">
+                        <div className="capture-bar-wrapper-modal">
+                          <div
+                            className={`capture-bar-fill-modal ${getCatchDifficulty(captureRate).class}`}
+                            style={{ width: `${(captureRate / 255) * 100}%` }}
+                          ></div>
+                        </div>
+                        <div className="capture-details-modal">
+                          <span
+                            className={`capture-difficulty-modal ${getCatchDifficulty(captureRate).class}`}
+                          >
+                            {getCatchDifficulty(captureRate).label}
+                          </span>
+                          <span className="capture-probability-modal">
+                            ~{getCatchProbability(captureRate)}%
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+
+                    <div className="gender-subsection-modal">
+                      <h6 className="section-header-modal">Gender Ratio</h6>
+                      {getGenderRatios(genderRatio).genderless ? (
+                        <div className="genderless-text-modal">Genderless</div>
+                      ) : (
+                        <div className="gender-bar-wrapper-modal">
+                          <div
+                            className="gender-bar-male-modal"
+                            style={{
+                              width: `${getGenderRatios(genderRatio).male}%`,
+                            }}
+                          >
+                            {getGenderRatios(genderRatio).male > 15 && (
+                              <span>
+                                ♂ {getGenderRatios(genderRatio).male.toFixed(0)}
+                                %
+                              </span>
+                            )}
+                          </div>
+                          <div
+                            className="gender-bar-female-modal"
+                            style={{
+                              width: `${getGenderRatios(genderRatio).female}%`,
+                            }}
+                          >
+                            {getGenderRatios(genderRatio).female > 15 && (
+                              <span>
+                                ♀{" "}
+                                {getGenderRatios(genderRatio).female.toFixed(0)}
+                                %
+                              </span>
+                            )}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
                 </div>
               </>
             ) : (
-              <div className="text-center py-5">
-                <Spinner
-                  animation="border"
-                  variant="danger"
-                >
-                  <span className="visually-hidden">Loading...</span>
-                </Spinner>
+              <div className="modal-pokeball-loader-container">
+                <div className="modal-pokeball-loader">
+                  <svg viewBox="0 0 100 100" className="pokeball-svg">
+                    <circle
+                      cx="50"
+                      cy="50"
+                      r="45"
+                      fill="#dc3545"
+                      className="pokeball-top"
+                    />
+                    <circle
+                      cx="50"
+                      cy="50"
+                      r="45"
+                      fill="white"
+                      className="pokeball-bottom"
+                    />
+                    <rect x="0" y="45" width="100" height="10" fill="#1a1a1a" />
+                    <circle
+                      cx="50"
+                      cy="50"
+                      r="15"
+                      fill="white"
+                      stroke="#1a1a1a"
+                      strokeWidth="3"
+                    />
+                    <circle cx="50" cy="50" r="8" fill="#ffd700" />
+                  </svg>
+                </div>
               </div>
             )}
           </Modal.Body>
