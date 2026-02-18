@@ -757,130 +757,154 @@
 /* Responsive adjustments */
 @media (max-width: 576px) {
   .pokemon-card-modal .modal-dialog {
-    max-width: 95%;
-    margin: 5px auto;
+    max-width: 98vw;
+    margin: 0.25rem auto;
+  }
+
+  .pokemon-card-modal .modal-content {
+    max-height: 98vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
   }
 
   .pokemon-card-body {
-    padding: 10px;
-    max-height: calc(100vh - 120px);
+    padding: 8px;
+    max-height: none !important;
+    overflow-y: auto !important;
+    flex: 1;
+    min-height: 0;
+  }
+
+  .pokemon-card-body::-webkit-scrollbar {
+    display: none;
+  }
+
+  .modal-header-card {
+    padding: 6px 8px;
+    flex-shrink: 0;
   }
 
   .sprite-wrapper {
-    padding: 10px;
-    margin-bottom: 8px;
+    padding: 6px;
+    margin-bottom: 4px;
   }
 
   .sprite-display {
-    gap: 8px;
-    margin-bottom: 8px;
+    gap: 4px;
+    margin-bottom: 4px;
   }
 
   .pokemon-sprite {
-    width: 80px;
-    height: 80px;
+    width: 55px;
+    height: 55px;
   }
 
   .sprite-label {
-    font-size: 0.65rem;
+    font-size: 0.55rem;
   }
 
   .shiny-toggle-btn-modal {
-    font-size: 0.75rem;
-    padding: 6px !important;
+    font-size: 0.65rem;
+    padding: 4px 8px !important;
   }
 
   .types-section-modal {
-    gap: 6px;
-    margin-bottom: 8px;
+    gap: 4px;
+    margin-bottom: 4px;
   }
 
   .type-badge-modal {
-    font-size: 0.65rem;
-    padding: 4px 10px !important;
+    font-size: 0.55rem;
+    padding: 2px 6px !important;
   }
 
   .stats-section-modal {
-    padding: 10px;
-    margin-bottom: 8px;
+    padding: 6px;
+    margin-bottom: 4px;
   }
 
   .stats-header {
-    font-size: 0.8rem;
-    margin-bottom: 8px;
-    padding-bottom: 6px;
+    font-size: 0.7rem;
+    margin-bottom: 4px;
+    padding-bottom: 3px;
   }
 
   .stat-row-modal {
-    margin-bottom: 6px;
-    gap: 6px;
+    margin-bottom: 3px;
+    gap: 4px;
   }
 
   .stat-name-modal {
-    min-width: 50px;
-    font-size: 0.65rem;
+    min-width: 40px;
+    font-size: 0.55rem;
   }
 
   .stat-bar-modal {
-    height: 16px;
+    height: 10px;
   }
 
   .stat-value-modal {
-    font-size: 0.7rem;
-    min-width: 28px;
+    font-size: 0.6rem;
+    min-width: 24px;
   }
 
   .info-section-modal {
-    padding: 8px 10px;
-    margin-bottom: 8px;
+    padding: 6px;
+    margin-bottom: 4px;
   }
 
   .info-row-modal {
-    padding: 4px 0;
+    padding: 2px 0;
   }
 
   .info-label-modal,
   .info-value-modal {
-    font-size: 0.7rem;
+    font-size: 0.6rem;
   }
 
   .description-section-modal {
-    padding: 10px;
-    margin-bottom: 8px;
+    padding: 6px;
+    margin-bottom: 4px;
   }
 
   .description-text-modal {
-    font-size: 0.75rem;
-    line-height: 1.5;
+    font-size: 0.65rem;
+    line-height: 1.35;
   }
 
   .wiki-btn-modal {
-    font-size: 0.8rem !important;
-    padding: 10px 12px !important;
+    font-size: 0.7rem !important;
+    padding: 6px 10px !important;
   }
 
   .pokemon-modal-title {
-    font-size: 1rem;
+    font-size: 0.9rem;
   }
 
   .pokemon-modal-id {
-    font-size: 0.65rem;
-    padding: 3px 6px !important;
-  }
-
-  .modal-header-card {
-    padding: 10px 12px;
+    font-size: 0.55rem;
+    padding: 2px 5px !important;
   }
 }
 
 @media (min-width: 577px) and (max-width: 768px) {
   .pokemon-card-modal .modal-dialog {
-    max-width: 90%;
+    max-width: 90vw;
+  }
+
+  .pokemon-card-modal .modal-content {
+    max-height: 92vh;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
   }
 
   .pokemon-card-body {
-    padding: 14px;
-    max-height: calc(100vh - 140px);
+    padding: 12px;
+    overflow-y: auto !important;
+    flex: 1;
+    min-height: 0;
   }
 
   .sprite-wrapper {
@@ -1596,99 +1620,93 @@ body.dark-mode .btn-close {
 }
 /* Mobile Responsiveness for New Sections */
 @media (max-width: 576px) {
-  .pokemon-card-modal .modal-dialog {
-    max-width: 95vw;
-    margin: 0.5rem auto;
-  }
-
   .pokemon-card-body {
     display: flex !important;
     flex-direction: column !important;
-    gap: 12px !important;
-    padding: 16px !important;
+    gap: 5px !important;
   }
 
   .modal-left-column,
   .modal-right-column {
     display: flex !important;
     flex-direction: column !important;
-    gap: 12px !important;
+    gap: 5px !important;
   }
 
   .special-badge {
-    font-size: 0.6rem !important;
-    padding: 3px 8px !important;
+    font-size: 0.5rem !important;
+    padding: 2px 5px !important;
   }
 
   .quick-info-badges {
-    gap: 6px;
-    margin-bottom: 10px;
+    gap: 4px;
+    margin-bottom: 4px;
   }
 
   .gen-badge,
   .exp-badge {
-    font-size: 0.65rem !important;
-    padding: 3px 8px !important;
+    font-size: 0.55rem !important;
+    padding: 2px 5px !important;
   }
 
   .abilities-section-modal {
-    padding: 10px;
-    margin-bottom: 12px;
+    padding: 6px;
+    margin-bottom: 4px;
   }
 
   .section-header-modal {
-    font-size: 0.75rem;
-    margin-bottom: 8px;
+    font-size: 0.65rem;
+    margin-bottom: 4px;
   }
 
   .ability-badge-modal {
-    font-size: 0.7rem !important;
-    padding: 5px 10px !important;
+    font-size: 0.6rem !important;
+    padding: 3px 6px !important;
   }
 
   .capture-gender-section-modal {
     grid-template-columns: 1fr;
-    gap: 10px;
-    margin-bottom: 12px;
+    gap: 5px;
+    margin-bottom: 4px;
   }
 
   .capture-subsection-modal,
   .gender-subsection-modal {
-    padding: 10px;
+    padding: 6px;
   }
 
   .capture-details-modal {
-    font-size: 0.7rem;
+    font-size: 0.6rem;
   }
 
   .gender-bar-wrapper-modal {
-    height: 28px;
+    height: 20px;
   }
 
   .gender-bar-male-modal,
   .gender-bar-female-modal {
-    font-size: 0.7rem;
+    font-size: 0.6rem;
   }
 
   .type-effectiveness-section-modal {
-    padding: 10px;
-    margin-bottom: 12px;
+    padding: 6px;
+    margin-bottom: 4px;
   }
 
   .effectiveness-row-modal {
     flex-direction: column;
     align-items: flex-start;
-    gap: 6px;
-    margin-bottom: 12px;
+    gap: 3px;
+    margin-bottom: 5px;
   }
 
   .effectiveness-label-modal {
-    font-size: 0.7rem;
+    font-size: 0.6rem;
     min-width: unset;
   }
 
   .type-badge-small-modal {
-    font-size: 0.6rem !important;
-    padding: 2px 6px !important;
+    font-size: 0.5rem !important;
+    padding: 1px 4px !important;
   }
 }
