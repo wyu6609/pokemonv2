@@ -36,6 +36,7 @@ export const AUDIO_CONFIG = {
     "/sounds/pokemon_littleroot.mp3",
     "/sounds/pokemon_theme.mp3",
     "/sounds/pokemon_center.mp3",
+    "/sounds/pokemon_pewtercity.mp3",
   ],
   DEFAULT_VOLUME: 1.0,
 };
