@@ -3,6 +3,7 @@ import { Modal, Button, Badge } from "react-bootstrap";
 import "./PokemonModal.css";
 import { v4 as uuidv4 } from "uuid";
 import axios from "axios";
+import { formatPokemonId } from "../utils/formatters";
 
 const PokemonModal = (props) => {
   //set loading
@@ -274,18 +275,51 @@ const PokemonModal = (props) => {
             closeButton
           >
             <div className="modal-header-content">
-              <Badge className="pokemon-modal-id">{`#${props.modaldata.data.id}`}</Badge>
-              <Modal.Title
-                className="pokemon-modal-title text-uppercase"
-                id="contained-modal-title-vcenter"
-              >
-                {props.modaldata.data.name}
-              </Modal.Title>
-              {(isLegendary || isMythical) && (
-                <Badge className="special-badge">
-                  {isMythical ? "✨ Mythical" : "👑 Legendary"}
-                </Badge>
-              )}
+              <div className="header-title-row">
+                <Badge className={`pokemon-modal-id ${props.modaldata.data.types[0].type.name}-id-badge`}>{formatPokemonId(props.modaldata.data.id)}</Badge>
+                <Modal.Title
+                  className="pokemon-modal-title text-uppercase"
+                  id="contained-modal-title-vcenter"
+                >
+                  {props.modaldata.data.name}
+                </Modal.Title>
+                {(isLegendary || isMythical) && (
+                  <Badge className="special-badge">
+                    {isMythical ? "✨ Mythical" : "👑 Legendary"}
+                  </Badge>
+                )}
+              </div>
+
+              {/* Type Badges and Quick Info in Header */}
+              <div className="header-meta-row">
+                <div className="types-section-modal">
+                  {props.modaldata.data.types.map((el) => (
+                    <Badge
+                      key={uuidv4()}
+                      className={`type-badge-modal ${el.type.name}`}
+                      style={{ cursor: "pointer" }}
+                      onClick={() => {
+                        const typeName =
+                          el.type.name.charAt(0).toUpperCase() +
+                          el.type.name.slice(1);
+                        window.open(
+                          `https://pokemon.fandom.com/wiki/${typeName}_type`,
+                          "_blank",
+                        );
+                      }}
+                      title={`Click to view ${el.type.name} type info`}
+                    >
+                      {el.type.name}
+                    </Badge>
+                  ))}
+                </div>
+                <div className="header-quick-info">
+                  <Badge className="header-gen-badge">Gen {generation}</Badge>
+                  <Badge className="header-exp-badge">
+                    EXP: {props.modaldata.data.base_experience || "N/A"}
+                  </Badge>
+                </div>
+              </div>
             </div>
           </Modal.Header>
           <Modal.Body className="pokemon-card-body">
@@ -293,29 +327,6 @@ const PokemonModal = (props) => {
               <>
                 {/* LEFT COLUMN - Visual & Primary Info */}
                 <div className="modal-left-column">
-                  {/* Type Badges - Clickable to open type page */}
-                  <div className="types-section-modal">
-                    {props.modaldata.data.types.map((el) => (
-                      <Badge
-                        key={uuidv4()}
-                        className={`type-badge-modal ${el.type.name}`}
-                        style={{ cursor: "pointer" }}
-                        onClick={() => {
-                          const typeName =
-                            el.type.name.charAt(0).toUpperCase() +
-                            el.type.name.slice(1);
-                          window.open(
-                            `https://pokemon.fandom.com/wiki/${typeName}_type`,
-                            "_blank",
-                          );
-                        }}
-                        title={`Click to view ${el.type.name} type info`}
-                      >
-                        {el.type.name}
-                      </Badge>
-                    ))}
-                  </div>
-
                   {/* Sprite Display with Shiny Toggle - Larger Images */}
                   <div className="sprite-wrapper">
                     <div className="sprite-display">
@@ -354,19 +365,11 @@ const PokemonModal = (props) => {
                     </Button>
                   </div>
 
-                  {/* Description - Moved under images */}
+                  {/* Description - Under images */}
                   <div className="description-section-modal">
                     <p className="description-text-modal">
                       {pokemonDescription}
                     </p>
-                  </div>
-
-                  {/* Generation & Base Experience Badge */}
-                  <div className="quick-info-badges">
-                    <Badge className="gen-badge">Gen {generation}</Badge>
-                    <Badge className="exp-badge">
-                      Base EXP: {props.modaldata.data.base_experience || "N/A"}
-                    </Badge>
                   </div>
 
                   {/* Abilities Section */}
@@ -506,7 +509,7 @@ const PokemonModal = (props) => {
                     )}
                   </div>
 
-                  {/* Capture Rate & Gender Section */}
+                  {/* Capture Rate & Gender Section - Compact */}
                   <div className="capture-gender-section-modal">
                     <div className="capture-subsection-modal">
                       <h6 className="section-header-modal">Catch Rate</h6>
@@ -535,35 +538,40 @@ const PokemonModal = (props) => {
                       {getGenderRatios(genderRatio).genderless ? (
                         <div className="genderless-text-modal">Genderless</div>
                       ) : (
-                        <div className="gender-bar-wrapper-modal">
-                          <div
-                            className="gender-bar-male-modal"
-                            style={{
-                              width: `${getGenderRatios(genderRatio).male}%`,
-                            }}
-                          >
-                            {getGenderRatios(genderRatio).male > 15 && (
-                              <span>
-                                ♂ {getGenderRatios(genderRatio).male.toFixed(0)}
-                                %
-                              </span>
-                            )}
+                        <>
+                          <div className="gender-bar-wrapper-modal">
+                            <div
+                              className="gender-bar-male-modal"
+                              style={{
+                                width: `${getGenderRatios(genderRatio).male}%`,
+                              }}
+                            >
+                              {getGenderRatios(genderRatio).male > 15 && (
+                                <span>
+                                  ♂{" "}
+                                  {getGenderRatios(genderRatio).male.toFixed(0)}
+                                  %
+                                </span>
+                              )}
+                            </div>
+                            <div
+                              className="gender-bar-female-modal"
+                              style={{
+                                width: `${getGenderRatios(genderRatio).female}%`,
+                              }}
+                            >
+                              {getGenderRatios(genderRatio).female > 15 && (
+                                <span>
+                                  ♀{" "}
+                                  {getGenderRatios(genderRatio).female.toFixed(
+                                    0,
+                                  )}
+                                  %
+                                </span>
+                              )}
+                            </div>
                           </div>
-                          <div
-                            className="gender-bar-female-modal"
-                            style={{
-                              width: `${getGenderRatios(genderRatio).female}%`,
-                            }}
-                          >
-                            {getGenderRatios(genderRatio).female > 15 && (
-                              <span>
-                                ♀{" "}
-                                {getGenderRatios(genderRatio).female.toFixed(0)}
-                                %
-                              </span>
-                            )}
-                          </div>
-                        </div>
+                        </>
                       )}
                     </div>
                   </div>

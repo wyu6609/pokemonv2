@@ -1,17 +1,24 @@
 import React, { useRef, useEffect, useState } from "react";
 import "./Search.css";
 import { FormControl, Dropdown, Container } from "react-bootstrap";
+import { POKEMON_TYPES } from "../constants/pokemon";
+import { capitalizeFirstLetter } from "../utils/formatters";
 
-// Capitalize First letter
-const capitalizeFirstLetter = (str) => {
-  return str.charAt(0).toUpperCase() + str.slice(1);
-};
+const SEARCH_INPUT_FONT = "0.95rem Share Tech Mono, monospace";
+const SEARCH_INPUT_PADDING_LEFT = 15;
 
+/**
+ * Search Component
+ * Provides search input and type filter dropdown for Pokemon
+ * @param {string} searchTerm - Current search term
+ * @param {Function} onChangeSearch - Callback for search term changes
+ * @param {Function} setStatus - Callback for type filter changes
+ * @param {string} status - Current type filter status
+ */
 const Search = ({ searchTerm, onChangeSearch, setStatus, status }) => {
   const inputRef = useRef(null);
   const [cursorPosition, setCursorPosition] = useState(0);
 
-  //search input function
   const handleChange = (event) => {
     onChangeSearch(event.target.value);
   };
@@ -19,45 +26,22 @@ const Search = ({ searchTerm, onChangeSearch, setStatus, status }) => {
   // Update cursor position when text changes
   useEffect(() => {
     if (inputRef.current) {
-      const textWidth = getTextWidth(searchTerm, '0.95rem Share Tech Mono, monospace');
-      setCursorPosition(textWidth + 15); // 15px is the padding-left
+      const textWidth = getTextWidth(searchTerm, SEARCH_INPUT_FONT);
+      setCursorPosition(textWidth + SEARCH_INPUT_PADDING_LEFT);
     }
   }, [searchTerm]);
 
   // Function to measure text width
   const getTextWidth = (text, font) => {
-    const canvas = document.createElement('canvas');
-    const context = canvas.getContext('2d');
+    const canvas = document.createElement("canvas");
+    const context = canvas.getContext("2d");
     context.font = font;
     return context.measureText(text).width;
   };
 
-  //status Handler
-  const statusHandler = (type) => {
+  const handleTypeSelect = (type) => {
     setStatus(type.toLowerCase());
   };
-
-  const typeList = [
-    "all",
-    "bug",
-    "dark",
-    "dragon",
-    "electric",
-    "fairy",
-    "fighting",
-    "fire",
-    "flying",
-    "ghost",
-    "grass",
-    "ground",
-    "ice",
-    "normal",
-    "poison",
-    "psychic",
-    "rock",
-    "steel",
-    "water",
-  ];
 
   return (
     <Container className="sticky-top">
@@ -71,7 +55,12 @@ const Search = ({ searchTerm, onChangeSearch, setStatus, status }) => {
             onChange={handleChange}
             className="search-input"
           />
-          <span className="terminal-cursor" style={{ left: `${cursorPosition}px` }}>█</span>
+          <span
+            className="terminal-cursor"
+            style={{ left: `${cursorPosition}px` }}
+          >
+            █
+          </span>
         </div>
 
         <Dropdown>
@@ -83,11 +72,11 @@ const Search = ({ searchTerm, onChangeSearch, setStatus, status }) => {
           </Dropdown.Toggle>
 
           <Dropdown.Menu className="text-uppercase font-weight-bold dropdown-menu-custom">
-            {typeList.map((type) => (
+            {POKEMON_TYPES.map((type) => (
               <Dropdown.Item
                 key={type}
                 className={`${type}-text-search`}
-                onClick={() => statusHandler(type)}
+                onClick={() => handleTypeSelect(type)}
               >
                 {capitalizeFirstLetter(type)}
               </Dropdown.Item>

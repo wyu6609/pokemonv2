@@ -1,8 +1,17 @@
 import React, { useState, useEffect } from "react";
 import { Card, Badge } from "react-bootstrap";
-
 import "./PokemonCard.css";
+import { formatPokemonId } from "../utils/formatters";
 
+/**
+ * PokemonCard Component
+ * Displays a Pokemon card with image, name, type, and favorite toggle
+ * @param {Object} pokemon - Pokemon data object
+ * @param {Function} setModalShow - Callback to open modal
+ * @param {boolean} isFavorite - Whether this Pokemon is favorited
+ * @param {Function} onToggleFavorite - Callback to toggle favorite status
+ * @param {boolean} isSelected - Whether this card is currently selected
+ */
 const PokemonCard = ({
   pokemon,
   setModalShow,
@@ -10,86 +19,26 @@ const PokemonCard = ({
   onToggleFavorite,
   isSelected = false,
 }) => {
-  //set pokemon type color state
   const [typeColor, setTypeColor] = useState(pokemon.data.types[0].type.name);
   const [isFav, setIsFav] = useState(isFavorite);
+  const [front, setFront] = useState(true);
 
   // Sync isFav with isFavorite prop
   useEffect(() => {
     setIsFav(isFavorite);
   }, [isFavorite]);
 
-  // set color type
+  // Set color type based on primary type
   useEffect(() => {
-    switch (pokemon.data.types[0].type.name) {
-      case "bug":
-        setTypeColor("bug");
-        break;
-      case "dark":
-        setTypeColor("dark");
-        break;
-      case "dragon":
-        setTypeColor("dragon");
-
-        break;
-      case "electric":
-        setTypeColor("electric");
-        break;
-      case "fairy":
-        setTypeColor("fairy");
-        break;
-      case "fighting":
-        setTypeColor("fighting");
-        break;
-      case "fire":
-        setTypeColor("fire");
-        break;
-      case "flying":
-        setTypeColor("flying");
-        break;
-      case "ghost":
-        setTypeColor("ghost");
-        break;
-      case "grass":
-        setTypeColor("grass");
-        break;
-      case "ground":
-        setTypeColor("ground");
-        break;
-      case "ice":
-        setTypeColor("ice");
-        break;
-      case "normal":
-        setTypeColor("normal");
-        break;
-      case "poison":
-        setTypeColor("poison");
-        break;
-      case "psychic":
-        setTypeColor("psychic");
-        break;
-      case "rock":
-        setTypeColor("rock");
-        break;
-      case "steel":
-        setTypeColor("steel");
-        break;
-      case "water":
-        setTypeColor("water");
-        break;
-      default:
-        setTypeColor("");
-    }
+    setTypeColor(pokemon.data.types[0].type.name);
   }, [pokemon.data.types]);
 
-  //front state
-  const [front, setFront] = useState(true);
-  const clickHandler = (event) => {
+  const handleCardClick = () => {
     setFront(!front);
     setModalShow(true);
   };
 
-  const toggleFavorite = (event) => {
+  const handleToggleFavorite = (event) => {
     event.stopPropagation();
     setIsFav(!isFav);
     if (onToggleFavorite) {
@@ -100,9 +49,7 @@ const PokemonCard = ({
   return (
     <Card
       size="lg"
-      onClick={() => {
-        setModalShow(true);
-      }}
+      onClick={handleCardClick}
       className={`card shadow pokemon-card border-${typeColor} text-dark ${
         isSelected ? "selected" : ""
       }`}
@@ -114,12 +61,12 @@ const PokemonCard = ({
         text="dark"
         className="position-absolute top-0 start-0 mt-2 ms-2 pokemon-id-badge"
       >
-        #{pokemon.data.id}
+        {formatPokemonId(pokemon.data.id)}
       </Badge>
 
       <span
         className="favorite-icon position-absolute top-0 end-0 mt-2 me-2"
-        onClick={toggleFavorite}
+        onClick={handleToggleFavorite}
         title={isFav ? "Remove from favorites" : "Add to favorites"}
         style={{ cursor: "pointer" }}
       >
@@ -164,8 +111,9 @@ const PokemonCard = ({
               ? pokemon.data.sprites.front_default
               : pokemon.data.sprites.back_default
           }
-          onClick={clickHandler}
+          onClick={handleCardClick}
           style={{ cursor: "pointer" }}
+          alt={`${pokemon.data.name} sprite`}
         />
       </Card.Body>
 

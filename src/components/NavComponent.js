@@ -1,6 +1,13 @@
 import React from "react";
-
 import { Button, Navbar, Container } from "react-bootstrap";
+import { EXTERNAL_URLS } from "../constants/apiEndpoints";
+
+/**
+ * NavComponent
+ * Navigation bar with Pokemon logo and audio toggle button
+ * @param {Function} onToggleAudio - Callback for audio toggle
+ * @param {boolean} audioEnabled - Whether audio is enabled
+ */
 const NavComponent = ({ onToggleAudio, audioEnabled }) => {
   return (
     <Navbar
@@ -12,9 +19,9 @@ const NavComponent = ({ onToggleAudio, audioEnabled }) => {
     >
       <Container className="justify-content-center">
         <Navbar.Brand className="text-align-center">
-          <a href="https://pokeapi.co/" target="_blank" rel="noreferrer">
+          <a href={EXTERNAL_URLS.POKEAPI_HOME} target="_blank" rel="noreferrer">
             <img
-              src="https://upload.wikimedia.org/wikipedia/commons/9/98/International_Pok%C3%A9mon_logo.svg"
+              src={EXTERNAL_URLS.POKEMON_LOGO}
               width="90%"
               height="50px"
               alt="Pokemon logo"

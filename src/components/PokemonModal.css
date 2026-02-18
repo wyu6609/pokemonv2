@@ -156,8 +156,7 @@
 
   .capture-subsection-modal,
   .gender-subsection-modal {
-    padding: 16px !important;
-    min-height: 140px !important;
+    padding: 14px !important;
   }
 
   .stat-bar-modal {
@@ -237,26 +236,128 @@
 /* Modal Header Card Style */
 .modal-header-card {
   border-radius: 12px 12px 0 0;
-  padding: 16px 20px;
+  padding: 14px 20px;
   border-bottom: 3px solid rgba(0, 0, 0, 0.2);
   box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.3);
+  position: relative;
 }
 
 .modal-header-content {
   display: flex;
-  align-items: center;
-  gap: 12px;
+  flex-direction: column;
+  gap: 10px;
   width: 100%;
 }
 
-.pokemon-modal-id {
-  background: rgba(0, 0, 0, 0.3) !important;
+.header-title-row {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.header-meta-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+
+.header-quick-info {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+.header-gen-badge {
+  background: linear-gradient(145deg, #667eea 0%, #5568d3 100%) !important;
   color: white !important;
-  font-weight: bold;
-  font-size: 0.75rem;
-  padding: 4px 8px !important;
-  border-radius: 6px;
-  border: 1px solid rgba(255, 255, 255, 0.3);
+  font-weight: 600 !important;
+  font-size: 0.7rem !important;
+  padding: 4px 10px !important;
+  border-radius: 8px !important;
+  border: 1px solid rgba(102, 126, 234, 0.5) !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.header-exp-badge {
+  background: linear-gradient(145deg, #48bb78 0%, #38a169 100%) !important;
+  color: white !important;
+  font-weight: 600 !important;
+  font-size: 0.7rem !important;
+  padding: 4px 10px !important;
+  border-radius: 8px !important;
+  border: 1px solid rgba(72, 187, 120, 0.5) !important;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3) !important;
+  letter-spacing: 0.5px;
+}
+
+.pokemon-modal-id {
+  font-size: 0.7rem;
+  font-weight: 700;
+  background: rgba(255, 255, 255, 0.95) !important;
+  color: #2c2c2c !important;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+  border: 2px solid rgba(0, 0, 0, 0.1);
+  padding: 2px 8px !important;
+  border-radius: 20px;
+  letter-spacing: 0.5px;
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+/* Type-specific ID badge accents for modal - match main card exactly */
+.water-id-badge {
+  border-color: rgba(44, 151, 255, 0.3) !important;
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.1),
+    0 0 8px rgba(44, 151, 255, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
+}
+
+.fire-id-badge {
+  border-color: rgba(246, 56, 7, 0.3) !important;
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.1),
+    0 0 8px rgba(246, 56, 7, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
+}
+
+.grass-id-badge {
+  border-color: rgba(157, 171, 24, 0.3) !important;
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.1),
+    0 0 8px rgba(157, 171, 24, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
+}
+
+.electric-id-badge {
+  border-color: rgba(251, 193, 22, 0.3) !important;
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.1),
+    0 0 8px rgba(251, 193, 22, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
+}
+
+.psychic-id-badge {
+  border-color: rgba(249, 173, 251, 0.3) !important;
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.1),
+    0 0 8px rgba(249, 173, 251, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
+}
+
+.dark-id-badge {
+  border-color: rgba(60, 45, 34, 0.3) !important;
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.1),
+    0 0 8px rgba(60, 45, 34, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8) !important;
 }
 
 .pokemon-modal-title {
@@ -271,6 +372,10 @@
 .modal-header-card .btn-close {
   filter: brightness(0) invert(1);
   opacity: 0.8;
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  z-index: 10;
 }
 
 .modal-header-card .btn-close:hover {
@@ -447,44 +552,47 @@
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
 
-/* Type Badges Section - Enhanced at Top */
+/* Type Badges Section - Works in Header and Body */
 .types-section-modal {
   display: flex;
-  gap: 10px;
-  justify-content: center;
-  margin-bottom: 20px;
+  gap: 8px;
+  justify-content: flex-start;
   flex-wrap: wrap;
-  padding: 12px;
-  background: linear-gradient(
-    135deg,
-    rgba(255, 255, 255, 0.95) 0%,
-    rgba(248, 248, 248, 0.9) 100%
-  );
-  border-radius: 12px;
-  box-shadow:
-    0 2px 8px rgba(0, 0, 0, 0.12),
-    inset 0 1px 0 rgba(255, 255, 255, 0.5);
-  border: 2px solid rgba(0, 0, 0, 0.08);
+}
+
+.modal-header-card .types-section-modal {
+  background: transparent;
+  padding: 0;
+  border: none;
+  box-shadow: none;
+  margin: 0;
 }
 
 .type-badge-modal {
-  font-size: 0.85rem;
+  font-size: 0.75rem;
   font-weight: 700;
-  padding: 8px 18px !important;
-  border-radius: 20px;
+  padding: 5px 12px !important;
+  border-radius: 16px;
   text-transform: uppercase;
-  letter-spacing: 1px;
-  border: 2px solid rgba(0, 0, 0, 0.15);
+  letter-spacing: 0.8px;
+  border: 1.5px solid rgba(0, 0, 0, 0.2);
   box-shadow:
-    0 3px 6px rgba(0, 0, 0, 0.15),
+    0 2px 4px rgba(0, 0, 0, 0.15),
     inset 0 1px 2px rgba(255, 255, 255, 0.4);
   transition: all 0.25s ease;
   cursor: pointer;
   user-select: none;
 }
 
+.modal-header-card .type-badge-modal {
+  border: 1.5px solid rgba(255, 255, 255, 0.4);
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.3),
+    inset 0 1px 2px rgba(255, 255, 255, 0.3);
+}
+
 .type-badge-modal:hover {
-  transform: translateY(-3px) scale(1.05);
+  transform: translateY(-2px) scale(1.05);
   box-shadow:
     0 6px 14px rgba(0, 0, 0, 0.25),
     inset 0 1px 2px rgba(255, 255, 255, 0.4);
@@ -655,11 +763,11 @@
   );
   border: 2px solid rgba(0, 0, 0, 0.1);
   border-radius: 12px;
-  padding: 14px;
+  padding: 12px;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
-  min-height: 120px;
   display: flex;
   flex-direction: column;
+  gap: 8px;
 }
 
 .capture-bar-wrapper-modal {

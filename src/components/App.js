@@ -4,6 +4,11 @@ import PokemonPage from "./PokemonPage";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { AUDIO_CONFIG, APP_CONFIG } from "../constants/pokemon";
+import { EXTERNAL_URLS } from "../constants/apiEndpoints";
+
+const TRACK_CHANGE_ANIMATION_DURATION = 500;
+const TOAST_DELAY = 500;
 
 function App() {
   const audioRef = useRef(null);
@@ -12,14 +17,7 @@ function App() {
   const [shuffledTracks, setShuffledTracks] = useState([]);
   const [trackChanging, setTrackChanging] = useState(false);
 
-  const tracks = useMemo(
-    () => [
-      "/sounds/pokemon_littleroot.mp3",
-      "/sounds/pokemon_theme.mp3",
-      "/sounds/pokemon_center.mp3",
-    ],
-    [],
-  );
+  const tracks = useMemo(() => AUDIO_CONFIG.TRACKS, []);
 
   // Initialize with tracks in order for first play
   useEffect(() => {
@@ -44,7 +42,7 @@ function App() {
       setTrackChanging(true);
       const timer = setTimeout(() => {
         setTrackChanging(false);
-      }, 500);
+      }, TRACK_CHANGE_ANIMATION_DURATION);
       return () => clearTimeout(timer);
     }
   }, [currentTrackIndex, shuffledTracks.length]);
@@ -56,11 +54,11 @@ function App() {
       toast(
         <div className="toast-content-wrapper">
           <div className="toast-title-wrapper">
-            <span className="toast-title">POKÉDEX</span>
-            <span className="toast-version">v2.0</span>
+            <span className="toast-title">{APP_CONFIG.NAME}</span>
+            <span className="toast-version">{APP_CONFIG.VERSION}</span>
           </div>
           <a
-            href="https://github.com/wyu6609/pokemonv2"
+            href={EXTERNAL_URLS.GITHUB_REPO}
             target="_blank"
             rel="noopener noreferrer"
             className="toast-repo-link"
@@ -82,7 +80,7 @@ function App() {
           <div className="toast-connect-label">CONNECT WITH ME</div>
           <div className="toast-social-links">
             <a
-              href="https://github.com/wyu6609"
+              href={EXTERNAL_URLS.GITHUB_PROFILE}
               target="_blank"
               rel="noopener noreferrer"
               className="toast-social-link"
@@ -102,7 +100,7 @@ function App() {
               <span className="toast-social-text">GitHub</span>
             </a>
             <a
-              href="https://www.linkedin.com/in/will-yu-56b101a8/"
+              href={EXTERNAL_URLS.LINKEDIN_PROFILE}
               target="_blank"
               rel="noopener noreferrer"
               className="toast-social-link"
@@ -124,7 +122,7 @@ function App() {
           </div>
           <div className="toast-divider"></div>
           <a
-            href="https://pokeapi.co/"
+            href={EXTERNAL_URLS.POKEAPI_HOME}
             target="_blank"
             rel="noopener noreferrer"
             className="toast-pokeapi-credit"
@@ -167,7 +165,7 @@ function App() {
           },
         },
       );
-    }, 500);
+    }, TOAST_DELAY);
 
     return () => clearTimeout(timer);
   }, []);
@@ -220,13 +218,13 @@ function App() {
               <div className="pokedex-header">
                 <div className="pokedex-indicator"></div>
                 <a
-                  href="https://pokeapi.co/"
+                  href={EXTERNAL_URLS.POKEAPI_HOME}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="pokedex-title-link"
                 >
-                  <span className="pokedex-title">POKÉDEX</span>
-                  <span className="pokedex-version">v2.0</span>
+                  <span className="pokedex-title">{APP_CONFIG.NAME}</span>
+                  <span className="pokedex-version">{APP_CONFIG.VERSION}</span>
                 </a>
               </div>
 
