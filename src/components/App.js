@@ -158,7 +158,7 @@ function App() {
           toastId: "pokedex-title",
           onClose: () => {
             const audio = audioRef.current;
-            if (audio && !audioEnabled) {
+            if (audio && audio.paused) {
               setAudioEnabled(true);
               audio.play().catch((error) => {
                 console.log("Autoplay prevented:", error);
