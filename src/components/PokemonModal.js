@@ -264,7 +264,8 @@ const PokemonModal = (props) => {
     <>
       {props.modaldata ? (
         <Modal
-          {...props}
+          show={props.show}
+          onHide={props.onHide}
           size="sm"
           aria-labelledby="contained-modal-title-vcenter"
           centered
