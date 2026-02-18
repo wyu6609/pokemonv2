@@ -122,6 +122,30 @@ function App() {
               <span className="toast-social-text">LinkedIn</span>
             </a>
           </div>
+          <div className="toast-divider"></div>
+          <a
+            href="https://pokeapi.co/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="toast-pokeapi-credit"
+            title="Data provided by PokéAPI"
+          >
+            <svg
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              strokeWidth="2"
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              className="toast-pokeapi-icon"
+            >
+              <circle cx="12" cy="12" r="10"/>
+              <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+              <path d="M2 12h20"/>
+            </svg>
+            <span className="toast-pokeapi-text">Powered by PokéAPI</span>
+          </a>
         </div>,
         {
           containerId: "center-toast",

@@ -1181,6 +1181,58 @@ body.dark-mode ::-webkit-scrollbar-thumb {
   font-family: "Arial", sans-serif;
 }
 
+/* PokéAPI Credit */
+.toast-pokeapi-credit {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px 16px;
+  background: rgba(255, 255, 255, 0.08);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  margin: 0 auto;
+  width: fit-content;
+  box-shadow: 
+    0 2px 6px rgba(0, 0, 0, 0.2),
+    inset 0 1px 2px rgba(255, 255, 255, 0.1);
+}
+
+.toast-pokeapi-credit:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.25);
+  transform: translateY(-2px);
+  box-shadow: 
+    0 4px 12px rgba(0, 0, 0, 0.3),
+    inset 0 1px 2px rgba(255, 255, 255, 0.15);
+  text-decoration: none;
+}
+
+.toast-pokeapi-icon {
+  width: 18px;
+  height: 18px;
+  color: rgba(255, 255, 255, 0.9);
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+  transition: transform 0.5s ease;
+}
+
+.toast-pokeapi-credit:hover .toast-pokeapi-icon {
+  transform: rotate(360deg);
+}
+
+.toast-pokeapi-text {
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  font-family: "Arial", sans-serif;
+}
+
 /* Mobile toast adjustments */
 @media (max-width: 576px) {
   .Toastify__toast-container {
@@ -1253,6 +1305,19 @@ body.dark-mode ::-webkit-scrollbar-thumb {
   .toast-social-icon {
     width: 18px;
     height: 18px;
+  }
+
+  .toast-pokeapi-credit {
+    font-size: 0.7rem;
+    padding: 6px 12px;
+    gap: 6px;
+    width: fit-content;
+    margin: 0 auto;
+  }
+
+  .toast-pokeapi-credit svg {
+    width: 16px;
+    height: 16px;
   }
 
   .pokedex-title-toast .Toastify__close-button {
