@@ -46,6 +46,9 @@ const PokemonCard = ({
     }
   };
 
+  // Generate a random animation delay for hover effect (0-0.5s)
+  const [hoverDelay] = useState(() => `${Math.random() * 0.5}s`);
+
   return (
     <Card
       size="lg"
@@ -53,7 +56,7 @@ const PokemonCard = ({
       className={`card shadow pokemon-card border-${typeColor} text-dark ${
         isSelected ? "selected" : ""
       }`}
-      style={{ paddingTop: "0.5rem" }}
+      style={{ paddingTop: "0.5rem", transitionDelay: hoverDelay }}
     >
       <Badge
         pill
