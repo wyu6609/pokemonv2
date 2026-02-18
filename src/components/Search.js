@@ -71,7 +71,19 @@ const Search = ({ searchTerm, onChangeSearch, setStatus, status }) => {
             {capitalizeFirstLetter(status)}
           </Dropdown.Toggle>
 
-          <Dropdown.Menu className="text-uppercase font-weight-bold dropdown-menu-custom">
+          <Dropdown.Menu 
+            className="text-uppercase font-weight-bold dropdown-menu-custom"
+            popperConfig={{
+              modifiers: [
+                {
+                  name: 'offset',
+                  options: {
+                    offset: [0, 8],
+                  },
+                },
+              ],
+            }}
+          >
             {POKEMON_TYPES.map((type) => (
               <Dropdown.Item
                 key={type}
