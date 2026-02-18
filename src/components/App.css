@@ -830,55 +830,67 @@ body.dark-mode ::-webkit-scrollbar-thumb {
   }
 }
 
+/* Ensure Toastify containers don't cover modals */
+.Toastify__toast-container {
+  z-index: 1000 !important;
+}
+
+/* Custom 5-column layout for desktop */
+@media (min-width: 1200px) {
+  .pokemon-col-5 {
+    flex: 0 0 calc(20% - 0.75rem) !important;
+    max-width: calc(20% - 0.75rem) !important;
+  }
+  
+  .pokemon-col-5 .card.pokemon-card {
+    margin: 4px !important;
+  }
+}
+
 /* Custom Pokedex Title Toast Styling */
 .pokedex-title-toast {
   background: linear-gradient(
     145deg,
-    rgba(220, 53, 69, 0.98) 0%,
-    rgba(200, 40, 55, 0.95) 50%,
-    rgba(180, 30, 45, 0.98) 100%
+    rgba(220, 53, 69, 0.95) 0%,
+    rgba(200, 40, 55, 0.9) 50%,
+    rgba(180, 30, 45, 0.95) 100%
   ) !important;
   backdrop-filter: blur(20px) !important;
   -webkit-backdrop-filter: blur(20px) !important;
-  border: 3px solid rgba(240, 70, 85, 0.8) !important;
-  border-radius: 20px !important;
+  border: 2px solid #1a1a1a !important;
+  border-radius: 16px !important;
   box-shadow:
-    0 12px 40px rgba(0, 0, 0, 0.8),
-    inset 0 2px 8px rgba(255, 255, 255, 0.3),
-    inset 0 -2px 8px rgba(0, 0, 0, 0.3),
-    0 0 40px rgba(220, 53, 69, 0.6) !important;
-  padding: 30px 40px !important;
-  min-width: 400px !important;
+    inset 0 2px 4px rgba(255, 255, 255, 0.2),
+    inset 0 -2px 4px rgba(0, 0, 0, 0.2),
+    0 8px 24px rgba(0, 0, 0, 0.5),
+    0 0 30px rgba(220, 53, 69, 0.4) !important;
+  padding: 24px 32px !important;
+  min-width: 380px !important;
   color: #ffffff !important;
   position: relative !important;
-  overflow: hidden !important;
+  overflow: visible !important;
+  z-index: 1000 !important;
 }
 
 .pokedex-title-toast::before {
   content: "";
   position: absolute;
-  inset: 6px;
-  border-radius: 16px;
-  border: 2px solid rgba(240, 70, 85, 0.4);
+  top: 8px;
+  left: 8px;
+  right: 8px;
+  bottom: 8px;
+  border-radius: 12px;
   pointer-events: none;
-}
-
-.pokedex-title-toast::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 90%;
-  height: 85%;
   background: radial-gradient(
     ellipse at center,
-    rgba(255, 255, 255, 0.15) 0%,
+    rgba(255, 255, 255, 0.1) 0%,
     rgba(255, 255, 255, 0.05) 50%,
     transparent 100%
   );
-  border-radius: 15px;
-  pointer-events: none;
+}
+
+.pokedex-title-toast::after {
+  display: none;
 }
 
 .pokedex-title-toast-progress {
@@ -895,6 +907,9 @@ body.dark-mode ::-webkit-scrollbar-thumb {
 .pokedex-title-toast .Toastify__close-button {
   color: rgba(255, 255, 255, 0.9) !important;
   opacity: 0.9 !important;
+  position: absolute !important;
+  right: 12px !important;
+  top: 12px !important;
 }
 
 .pokedex-title-toast .Toastify__close-button:hover {
@@ -902,14 +917,217 @@ body.dark-mode ::-webkit-scrollbar-thumb {
   opacity: 1 !important;
 }
 
+/* Toast Content Wrapper */
+.toast-content-wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+  z-index: 1;
+  text-align: center;
+  padding-right: 24px;
+  margin-left: 24px;
+}
+
+.toast-title-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  width: 100%;
+}
+
+.toast-title {
+  color: rgba(255, 255, 255, 0.95);
+  font-weight: bold;
+  font-size: 1.8rem;
+  letter-spacing: 3px;
+  text-shadow:
+    0 0 10px rgba(255, 255, 255, 0.3),
+    0 2px 4px rgba(0, 0, 0, 0.5);
+  font-family: "Arial Black", "Impact", sans-serif;
+  text-transform: uppercase;
+}
+
+.toast-version {
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 3px 8px;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 4px;
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Repository Link */
+.toast-repo-link {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  background: rgba(255, 255, 255, 0.08);
+  border-radius: 6px;
+  font-size: 0.75rem;
+  text-decoration: none !important;
+  transition: all 0.3s ease;
+  cursor: pointer;
+}
+
+.toast-repo-link:hover {
+  background: rgba(255, 255, 255, 0.15);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  text-decoration: none !important;
+}
+
+.toast-repo-link:active,
+.toast-repo-link:visited,
+.toast-repo-link:focus {
+  text-decoration: none !important;
+}
+
+.toast-repo-icon {
+  fill: rgba(255, 255, 255, 0.8);
+  flex-shrink: 0;
+}
+
+.toast-repo-text {
+  color: rgba(255, 255, 255, 0.9);
+  font-weight: 500;
+  letter-spacing: 0.3px;
+  font-family: "Courier New", monospace;
+}
+
+/* Divider */
+.toast-divider {
+  width: 80%;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.3) 50%,
+    transparent 100%
+  );
+  margin: 4px 0;
+}
+
+/* Connect Label */
+.toast-connect-label {
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  color: rgba(255, 255, 255, 0.7);
+  text-transform: uppercase;
+  margin-top: 2px;
+}
+
+/* Social Links Container */
+.toast-social-links {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+}
+
+.toast-social-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  padding: 10px 16px;
+  background: rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-radius: 8px;
+  text-decoration: none !important;
+  transition: all 0.3s ease;
+  flex: 1;
+  max-width: 120px;
+  box-shadow:
+    inset 0 1px 2px rgba(255, 255, 255, 0.2),
+    0 2px 6px rgba(0, 0, 0, 0.3);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.toast-social-link:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: translateY(-3px);
+  box-shadow:
+    inset 0 1px 2px rgba(255, 255, 255, 0.3),
+    0 4px 12px rgba(0, 0, 0, 0.4);
+  border-color: rgba(255, 255, 255, 0.3);
+  text-decoration: none !important;
+}
+
+.toast-social-link:active,
+.toast-social-link:visited,
+.toast-social-link:focus {
+  text-decoration: none !important;
+}
+
+.toast-social-icon {
+  fill: white;
+  color: white;
+  filter: drop-shadow(0 1px 2px rgba(0, 0, 0, 0.3));
+}
+
+.toast-social-text {
+  color: white;
+  font-weight: 600;
+  font-size: 0.75rem;
+  letter-spacing: 0.5px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+  font-family: "Arial", sans-serif;
+}
+
 /* Mobile toast adjustments */
 @media (max-width: 576px) {
   .pokedex-title-toast {
     min-width: 300px !important;
-    padding: 20px 25px !important;
+    padding: 18px 20px !important;
   }
 
-  .pokedex-title-toast::before {
-    inset: 4px;
+  .toast-content-wrapper {
+    padding-right: 20px;
+    margin-left: 20px;
+    gap: 10px;
+  }
+
+  .toast-title {
+    font-size: 1.4rem;
+    letter-spacing: 2px;
+  }
+
+  .toast-version {
+    font-size: 0.65rem;
+    padding: 2px 6px;
+  }
+
+  .toast-repo-link {
+    font-size: 0.7rem;
+    padding: 3px 10px;
+  }
+
+  .toast-social-links {
+    gap: 8px;
+  }
+
+  .toast-social-link {
+    padding: 8px 12px;
+    max-width: 100px;
+  }
+
+  .toast-social-text {
+    font-size: 0.7rem;
+  }
+
+  .toast-social-icon {
+    width: 18px;
+    height: 18px;
   }
 }

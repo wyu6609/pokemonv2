@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import PokemonCard from "./PokemonCard";
 import { Row, Col } from "react-bootstrap";
 import PokemonModal from "./PokemonModal";
-import { v4 as uuidv4 } from "uuid";
 
 const PokemonCollection = ({ pokemon, favorites = [], onToggleFavorite }) => {
   //modal pokemon data
@@ -23,12 +22,13 @@ const PokemonCollection = ({ pokemon, favorites = [], onToggleFavorite }) => {
           setModalData(poke);
           setSelectedCardId(poke.data.id);
         }}
-        key={uuidv4()}
+        key={poke.data.id}
         xs={12}
         sm={6}
         md={4}
         lg={3}
         xl={2}
+        className="pokemon-col-5"
       >
         <PokemonCard
           setModalShow={setModalShow}

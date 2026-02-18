@@ -14,6 +14,11 @@ const PokemonCard = ({
   const [typeColor, setTypeColor] = useState(pokemon.data.types[0].type.name);
   const [isFav, setIsFav] = useState(isFavorite);
 
+  // Sync isFav with isFavorite prop
+  useEffect(() => {
+    setIsFav(isFavorite);
+  }, [isFavorite]);
+
   // set color type
   useEffect(() => {
     switch (pokemon.data.types[0].type.name) {
@@ -80,8 +85,8 @@ const PokemonCard = ({
   //front state
   const [front, setFront] = useState(true);
   const clickHandler = (event) => {
-    event.stopPropagation();
     setFront(!front);
+    setModalShow(true);
   };
 
   const toggleFavorite = (event) => {
@@ -92,20 +97,16 @@ const PokemonCard = ({
     }
   };
 
-  const hp = pokemon.data.stats[0].base_stat;
-  const attack = pokemon.data.stats[1].base_stat;
-  const defense = pokemon.data.stats[2].base_stat;
-  const maxStat = 150;
-
   return (
     <Card
       size="lg"
       onClick={() => {
         setModalShow(true);
       }}
-      className={`card shadow pokemon-card border-${typeColor} text-dark p-2 ${
+      className={`card shadow pokemon-card border-${typeColor} text-dark ${
         isSelected ? "selected" : ""
       }`}
+      style={{ paddingTop: "0.5rem" }}
     >
       <Badge
         pill
@@ -117,14 +118,13 @@ const PokemonCard = ({
       </Badge>
 
       <span
-        className="favorite-icon"
+        className="favorite-icon position-absolute top-0 end-0 mt-2 me-2"
         onClick={toggleFavorite}
         title={isFav ? "Remove from favorites" : "Add to favorites"}
         style={{ cursor: "pointer" }}
       >
         {isFav ? (
           <svg
-            className="position-absolute top-0 end-0 mt-2 me-2"
             stroke="currentColor"
             fill="currentColor"
             strokeWidth="0"
@@ -138,7 +138,7 @@ const PokemonCard = ({
           </svg>
         ) : (
           <svg
-            className="position-absolute top-0 end-0 mt-2 me-2 info-svg"
+            className="info-svg"
             stroke="currentColor"
             fill="currentColor"
             strokeWidth="0"
@@ -152,13 +152,7 @@ const PokemonCard = ({
         )}
       </span>
 
-      <Card.Title
-        className="text-capitalize text-center font-weight-bold"
-        style={{ fontSize: "1.1rem", marginTop: "1.5rem" }}
-      >
-        {pokemon.data.name}
-      </Card.Title>
-      <Card.Body className="p-2">
+      <Card.Body className="p-2 pokemon-image-container" style={{ paddingTop: "0.5rem", paddingBottom: "3rem" }}>
         <Card.Img
           className="pokemon-image rounded-3"
           variant="top"
@@ -170,62 +164,15 @@ const PokemonCard = ({
           onClick={clickHandler}
           style={{ cursor: "pointer" }}
         />
-
-        <div className="types-container mt-2 d-flex gap-2 justify-content-center flex-wrap">
-          {pokemon.data.types.map((type, index) => (
-            <Badge key={index} className={`${type.type.name} type-badge`}>
-              {type.type.name}
-            </Badge>
-          ))}
-        </div>
-
-        <div className="stats-container">
-          <div className="stat-row d-flex justify-content-between align-items-center mb-2">
-            <span className="stat-label" style={{ fontSize: "0.75rem" }}>
-              HP
-            </span>
-            <div className="stat-bar">
-              <div
-                className="stat-fill hp"
-                style={{ width: `${(hp / maxStat) * 100}%` }}
-              ></div>
-            </div>
-            <span className="stat-value" style={{ fontSize: "0.7rem" }}>
-              {hp}
-            </span>
-          </div>
-          <div className="stat-row d-flex justify-content-between align-items-center mb-2">
-            <span className="stat-label" style={{ fontSize: "0.75rem" }}>
-              ATK
-            </span>
-            <div className="stat-bar">
-              <div
-                className="stat-fill atk"
-                style={{ width: `${(attack / maxStat) * 100}%` }}
-              ></div>
-            </div>
-            <span className="stat-value" style={{ fontSize: "0.7rem" }}>
-              {attack}
-            </span>
-          </div>
-          <div className="stat-row d-flex justify-content-between align-items-center">
-            <span className="stat-label" style={{ fontSize: "0.75rem" }}>
-              DEF
-            </span>
-            <div className="stat-bar">
-              <div
-                className="stat-fill def"
-                style={{ width: `${(defense / maxStat) * 100}%` }}
-              ></div>
-            </div>
-            <span className="stat-value" style={{ fontSize: "0.7rem" }}>
-              {defense}
-            </span>
-          </div>
-        </div>
       </Card.Body>
+
+      <Card.Title
+        className={`text-capitalize text-center font-weight-bold pokemon-name-bottom name-${typeColor}`}
+      >
+        {pokemon.data.name}
+      </Card.Title>
     </Card>
   );
 };
 
-export default PokemonCard;
+export default React.memo(PokemonCard);
