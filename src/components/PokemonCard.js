@@ -18,10 +18,11 @@ const PokemonCard = ({
   isFavorite = false,
   onToggleFavorite,
   isSelected = false,
+  shiny = false,
 }) => {
   const [typeColor, setTypeColor] = useState(pokemon.data.types[0].type.name);
   const [isFav, setIsFav] = useState(isFavorite);
-  const [front, setFront] = useState(true);
+  // Removed front/back toggle, always show front
 
   // Sync isFav with isFavorite prop
   useEffect(() => {
@@ -33,8 +34,9 @@ const PokemonCard = ({
     setTypeColor(pokemon.data.types[0].type.name);
   }, [pokemon.data.types]);
 
+
+  // Open modal on card click
   const handleCardClick = () => {
-    setFront(!front);
     setModalShow(true);
   };
 
@@ -102,6 +104,7 @@ const PokemonCard = ({
         )}
       </span>
 
+
       <Card.Body
         className="p-2 pokemon-image-container"
         style={{ paddingTop: "0.5rem", paddingBottom: "3rem" }}
@@ -110,11 +113,10 @@ const PokemonCard = ({
           className="pokemon-image rounded-3"
           variant="top"
           src={
-            front
-              ? pokemon.data.sprites.front_default
-              : pokemon.data.sprites.back_default
+            shiny
+              ? pokemon.data.sprites.front_shiny
+              : pokemon.data.sprites.front_default
           }
-          onClick={handleCardClick}
           style={{ cursor: "pointer" }}
           alt={`${pokemon.data.name} sprite`}
         />

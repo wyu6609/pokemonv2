@@ -36,6 +36,7 @@ const PokemonCollection = ({ pokemon, favorites = [], onToggleFavorite }) => {
           isFavorite={isFav}
           onToggleFavorite={onToggleFavorite}
           isSelected={isSelected}
+          shiny={shiny}
         />
       </Col>
     );
